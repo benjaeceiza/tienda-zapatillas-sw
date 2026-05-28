@@ -1,16 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.tienda.zapatillas;
 
-/**
- *
- * @author benja
- */
+// Importamos la clase de la conexion
+import com.mycompany.tienda.zapatillas.conexion.ConexionDB;
+
 public class TiendaZapatillas {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Iniciando sistema... Probando conexión:");
+        
+        // Llamamos al metodo conectar
+        ConexionDB.conectar();
     }
 }
