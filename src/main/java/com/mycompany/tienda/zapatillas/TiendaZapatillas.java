@@ -1,14 +1,17 @@
 package com.mycompany.tienda.zapatillas;
 
-// Importamos la clase de la conexion
-import com.mycompany.tienda.zapatillas.conexion.ConexionDB;
+import com.mycompany.tienda.zapatillas.view.VentanaMain;
 
 public class TiendaZapatillas {
 
+  
     public static void main(String[] args) {
-        System.out.println("Iniciando sistema... Probando conexión:");
         
-        // Llamamos al metodo conectar
-        ConexionDB.conectar();
+        // 1. Creamos la ventana
+        VentanaMain ventana = new VentanaMain();
+        
+        // 2. La hacemos visible
+        ventana.setVisible(true);
+        
     }
 }
