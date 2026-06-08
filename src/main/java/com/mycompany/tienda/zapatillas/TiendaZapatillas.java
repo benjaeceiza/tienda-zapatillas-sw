@@ -1,17 +1,19 @@
 package com.mycompany.tienda.zapatillas;
 
-import com.mycompany.tienda.zapatillas.view.VentanaMain;
+// Importamos tu nueva vista de Login
+import com.mycompany.tienda.zapatillas.view.login.LoginView;
 
 public class TiendaZapatillas {
 
-  
     public static void main(String[] args) {
-        
-        // 1. Creamos la ventana
-        VentanaMain ventana = new VentanaMain();
-        
-        // 2. La hacemos visible
-        ventana.setVisible(true);
-        
+        // Ejecutamos la interfaz gráfica de forma segura en el hilo de Swing
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                // Instanciamos tu vista del Login y la hacemos visible
+                LoginView login = new LoginView();
+                login.setVisible(true);
+                login.setLocationRelativeTo(null); // Esto la centra en la pantalla
+            }
+        });
     }
 }
