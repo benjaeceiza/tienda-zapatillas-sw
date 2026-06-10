@@ -1,35 +1,45 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.tienda.zapatillas.view.menus;
+
 import java.awt.event.ActionListener;
 
 /**
- *
- * @author Usuario
+ * Vista Principal del Administrador. Actúa como el contenedor maestro donde se
+ * cargan todas las demás pantallas.
  */
 public class MenuAdminView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuAdminView.class.getName());
 
-    /**
-     * Creates new form MenuAdminView
-     */
+    // =========================================================================
+    // 1. CONSTRUCTOR Y CONFIGURACIÓN INICIAL
+    // =========================================================================
     public MenuAdminView() {
-    initComponents();
-    this.setSize(1024, 720);
-    this.setResizable(false);
-    
-    // ASIGNACIÓN DE CARD NAMES POR CÓDIGO
-    panelPrincipal.add(panelDashboard, "cardDashboard");
-    panelPrincipal.add(panelClientes, "cardClientes");
-    panelPrincipal.add(panelEmpleados, "cardEmpleados");
-}
-public void mostrarPanel(String nombreCard) {
+        initComponents(); // Carga todo el diseño visual que armaste en NetBeans
+        this.setResizable(false); // Bloquea el tamaño para que no desarmen el diseño
+        this.setLocationRelativeTo(null); // Centra la ventana en la pantalla al abrir
+
+        // Acá registramos cada panel como si fuera una "carta" de un mazo.
+        // Le ponemos un apodo (ej: "cardInventario") para después llamarlo fácil.
+        panelPrincipal.add(panelDashboard, "cardDashboard");
+        panelPrincipal.add(panelInventario, "cardInventario");
+        panelPrincipal.add(panelClientes, "cardClientes");
+        panelPrincipal.add(panelEmpleados, "cardEmpleados");
+        panelPrincipal.add(panelNuevaVenta, "cardNuevaVenta");
+        panelPrincipal.add(panelHistorialVentas, "cardHistorial");
+    }
+
+    // =========================================================================
+    // 2. MOTOR DE NAVEGACIÓN
+    // =========================================================================
+    /**
+     * Este método recibe el "apodo" de una carta y la pone al frente, ocultando
+     * las demás. Así logramos el efecto de cambiar de pantalla.
+     */
+    public void mostrarPanel(String nombreCard) {
         java.awt.CardLayout layout = (java.awt.CardLayout) panelPrincipal.getLayout();
         layout.show(panelPrincipal, nombreCard);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,13 +49,28 @@ public void mostrarPanel(String nombreCard) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelPrincipal = new javax.swing.JPanel();
         panelDashboard = new javax.swing.JPanel();
         btnMenuInventario = new javax.swing.JButton();
         btnMenuClientes = new javax.swing.JButton();
         btnMenuEmpleados = new javax.swing.JButton();
         btnVenta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnVerHistorial = new javax.swing.JButton();
+        panelPrincipal = new javax.swing.JPanel();
+        panelClientes = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaClientes = new javax.swing.JTable();
+        btnAgregarCliente = new javax.swing.JButton();
+        btnModificarCliente = new javax.swing.JButton();
+        btnEliminarCliente = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        panelEmpleados = new javax.swing.JPanel();
+        btnAgregarEmpleado = new javax.swing.JButton();
+        btnModificarEmpleado = new javax.swing.JButton();
+        btnEliminarEmpleado = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaEmpleados = new javax.swing.JTable();
         panelInventario = new javax.swing.JPanel();
         btnReportes = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -54,28 +79,33 @@ public void mostrarPanel(String nombreCard) {
         btnModificarProd = new javax.swing.JButton();
         btnAgregarProd = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        panelEmpleados = new javax.swing.JPanel();
-        btnAgregarEmpleado = new javax.swing.JButton();
-        btnModificarEmpleado = new javax.swing.JButton();
-        btnEliminarEmpleado = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tablaEmpleados = new javax.swing.JTable();
-        panelClientes = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaClientes = new javax.swing.JTable();
-        btnAgregarCliente = new javax.swing.JButton();
-        btnModificarCliente = new javax.swing.JButton();
-        btnEliminarCliente = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        panelNuevaVenta = new javax.swing.JPanel();
+        cmbClientes = new javax.swing.JComboBox<>();
+        cmbProductos = new javax.swing.JComboBox<>();
+        txtCantidad = new javax.swing.JTextField();
+        btnAgregarCarrito = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaCarrito = new javax.swing.JTable();
+        lblTotal = new javax.swing.JLabel();
+        btnConfirmarVenta = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        panelHistorialVentas = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 720));
-        getContentPane().setLayout(new java.awt.CardLayout());
-
-        panelPrincipal.setLayout(new java.awt.CardLayout());
-
-        panelDashboard.setPreferredSize(new java.awt.Dimension(111, 177));
+        panelDashboard.setPreferredSize(new java.awt.Dimension(583, 355));
 
         btnMenuInventario.setText("Inventario");
         btnMenuInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -83,55 +113,63 @@ public void mostrarPanel(String nombreCard) {
 
         btnMenuClientes.setText("Clientes");
         btnMenuClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenuClientes.addActionListener(this::btnMenuClientesActionPerformed);
 
         btnMenuEmpleados.setText("Empleados");
         btnMenuEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenuEmpleados.addActionListener(this::btnMenuEmpleadosActionPerformed);
 
         btnVenta.setText("Venta");
+        btnVenta.addActionListener(this::btnVentaActionPerformed);
 
         jLabel1.setText("Menu principal Admin");
+
+        btnVerHistorial.setText("Historial de Ventas");
+        btnVerHistorial.addActionListener(this::btnVerHistorialActionPerformed);
 
         javax.swing.GroupLayout panelDashboardLayout = new javax.swing.GroupLayout(panelDashboard);
         panelDashboard.setLayout(panelDashboardLayout);
         panelDashboardLayout.setHorizontalGroup(
             panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDashboardLayout.createSequentialGroup()
-                .addGap(93, 93, 93)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDashboardLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMenuInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMenuClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(panelDashboardLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel1))
-                    .addGroup(panelDashboardLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMenuClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(btnMenuEmpleados)
                         .addGap(18, 18, 18)
-                        .addComponent(btnVenta)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnVenta)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVerHistorial)))
+                .addGap(106, 106, 106))
         );
         panelDashboardLayout.setVerticalGroup(
             panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDashboardLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(85, 85, 85)
                 .addComponent(jLabel1)
-                .addGap(98, 98, 98)
+                .addGap(106, 106, 106)
                 .addGroup(panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMenuClientes)
                     .addComponent(btnMenuInventario)
                     .addComponent(btnMenuEmpleados)
-                    .addComponent(btnVenta))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVenta)
+                    .addComponent(btnVerHistorial))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
-        panelPrincipal.add(panelDashboard, "card3");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(585, 370));
 
-        btnReportes.setText("Reportes");
-        btnReportes.addActionListener(this::btnReportesActionPerformed);
+        panelPrincipal.setLayout(new java.awt.CardLayout());
 
-        tablaInventario.setModel(new javax.swing.table.DefaultTableModel(
+        panelClientes.setMaximumSize(null);
+
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -139,66 +177,65 @@ public void mostrarPanel(String nombreCard) {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Precio", "Stock"
+                "ID", "Nombre", "Apellido", "Correo Electrónico"
             }
         ));
-        jScrollPane4.setViewportView(tablaInventario);
+        jScrollPane2.setViewportView(tablaClientes);
 
-        btnEliminarProd.setText("Eliminar");
-        btnEliminarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminarProd.addActionListener(this::btnEliminarProdActionPerformed);
+        btnAgregarCliente.setText("Agregar");
+        btnAgregarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarCliente.addActionListener(this::btnAgregarClienteActionPerformed);
 
-        btnModificarProd.setText("Modificar");
-        btnModificarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnModificarProd.addActionListener(this::btnModificarProdActionPerformed);
+        btnModificarCliente.setText("Modificar");
+        btnModificarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnModificarCliente.addActionListener(this::btnModificarClienteActionPerformed);
 
-        btnAgregarProd.setText("Agregar");
-        btnAgregarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAgregarProd.addActionListener(this::btnAgregarProdActionPerformed);
+        btnEliminarCliente.setText("Eliminar");
+        btnEliminarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarCliente.addActionListener(this::btnEliminarClienteActionPerformed);
 
-        jLabel4.setText("INVENTARIO");
+        jLabel3.setText("LISTADO DE CLIENTES");
 
-        javax.swing.GroupLayout panelInventarioLayout = new javax.swing.GroupLayout(panelInventario);
-        panelInventario.setLayout(panelInventarioLayout);
-        panelInventarioLayout.setHorizontalGroup(
-            panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInventarioLayout.createSequentialGroup()
-                .addGap(267, 267, 267)
-                .addComponent(jLabel4)
+        javax.swing.GroupLayout panelClientesLayout = new javax.swing.GroupLayout(panelClientes);
+        panelClientes.setLayout(panelClientesLayout);
+        panelClientesLayout.setHorizontalGroup(
+            panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClientesLayout.createSequentialGroup()
+                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelClientesLayout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(btnAgregarCliente)
+                        .addGap(49, 49, 49)
+                        .addComponent(btnModificarCliente)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnEliminarCliente))
+                    .addGroup(panelClientesLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelClientesLayout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInventarioLayout.createSequentialGroup()
-                .addContainerGap(101, Short.MAX_VALUE)
-                .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelInventarioLayout.createSequentialGroup()
-                        .addComponent(btnAgregarProd)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificarProd)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarProd)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnReportes)))
-                .addGap(83, 83, 83))
         );
-        panelInventarioLayout.setVerticalGroup(
-            panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInventarioLayout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+        panelClientesLayout.setVerticalGroup(
+            panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClientesLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReportes)
-                    .addComponent(btnEliminarProd)
-                    .addComponent(btnModificarProd)
-                    .addComponent(btnAgregarProd))
-                .addGap(19, 19, 19))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificarCliente)
+                    .addComponent(btnEliminarCliente)
+                    .addComponent(btnAgregarCliente))
+                .addGap(32, 32, 32))
         );
 
-        panelPrincipal.add(panelInventario, "card4");
+        panelPrincipal.add(panelClientes, "card3");
 
         panelEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelEmpleados.setPreferredSize(new java.awt.Dimension(491, 355));
 
         btnAgregarEmpleado.setText("Agregar");
         btnAgregarEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -232,119 +269,315 @@ public void mostrarPanel(String nombreCard) {
         panelEmpleadosLayout.setHorizontalGroup(
             panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEmpleadosLayout.createSequentialGroup()
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEmpleadosLayout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(btnAgregarEmpleado)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnModificarEmpleado)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnEliminarEmpleado))
-                    .addGroup(panelEmpleadosLayout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(jLabel2))
-                    .addGroup(panelEmpleadosLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadosLayout.createSequentialGroup()
+                        .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelEmpleadosLayout.createSequentialGroup()
+                                .addComponent(btnAgregarEmpleado)
+                                .addGap(48, 48, 48)
+                                .addComponent(btnModificarEmpleado)
+                                .addGap(44, 44, 44)
+                                .addComponent(btnEliminarEmpleado)
+                                .addGap(37, 37, 37)))
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadosLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(221, 221, 221))))
         );
         panelEmpleadosLayout.setVerticalGroup(
             panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadosLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminarEmpleado)
                     .addComponent(btnModificarEmpleado)
                     .addComponent(btnAgregarEmpleado))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         panelPrincipal.add(panelEmpleados, "card2");
 
-        panelClientes.setMaximumSize(null);
+        btnReportes.setText("Reportes");
+        btnReportes.addActionListener(this::btnReportesActionPerformed);
 
-        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tablaInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Apellido", "Correo Electrónico"
+                "ID", "Marca", "Modelo", "Precio", "Stock"
             }
         ));
-        jScrollPane2.setViewportView(tablaClientes);
+        jScrollPane4.setViewportView(tablaInventario);
 
-        btnAgregarCliente.setText("Agregar");
-        btnAgregarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarProd.setText("Eliminar");
+        btnEliminarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarProd.addActionListener(this::btnEliminarProdActionPerformed);
 
-        btnModificarCliente.setText("Modificar");
-        btnModificarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnModificarCliente.addActionListener(this::btnModificarClienteActionPerformed);
+        btnModificarProd.setText("Modificar");
+        btnModificarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnModificarProd.addActionListener(this::btnModificarProdActionPerformed);
 
-        btnEliminarCliente.setText("Eliminar");
-        btnEliminarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarProd.setText("Agregar");
+        btnAgregarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarProd.addActionListener(this::btnAgregarProdActionPerformed);
 
-        jLabel3.setText("LISTADO DE CLIENTES");
+        jLabel4.setText("INVENTARIO");
 
-        javax.swing.GroupLayout panelClientesLayout = new javax.swing.GroupLayout(panelClientes);
-        panelClientes.setLayout(panelClientesLayout);
-        panelClientesLayout.setHorizontalGroup(
-            panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelClientesLayout.createSequentialGroup()
-                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelClientesLayout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(btnAgregarCliente)
-                        .addGap(49, 49, 49)
-                        .addComponent(btnModificarCliente)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnEliminarCliente))
-                    .addGroup(panelClientesLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelClientesLayout.createSequentialGroup()
-                        .addGap(215, 215, 215)
-                        .addComponent(jLabel3)))
-                .addContainerGap(74, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelInventarioLayout = new javax.swing.GroupLayout(panelInventario);
+        panelInventario.setLayout(panelInventarioLayout);
+        panelInventarioLayout.setHorizontalGroup(
+            panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInventarioLayout.createSequentialGroup()
+                .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInventarioLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelInventarioLayout.createSequentialGroup()
+                                .addGap(161, 161, 161)
+                                .addComponent(jLabel4))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelInventarioLayout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(btnAgregarProd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModificarProd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminarProd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReportes)))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
-        panelClientesLayout.setVerticalGroup(
-            panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelClientesLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel3)
+        panelInventarioLayout.setVerticalGroup(
+            panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInventarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReportes)
+                    .addComponent(btnEliminarProd)
+                    .addComponent(btnModificarProd)
+                    .addComponent(btnAgregarProd))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(panelInventario, "card4");
+
+        cmbClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbClientes.addActionListener(this::cmbClientesActionPerformed);
+
+        cmbProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbProductos.addActionListener(this::cmbProductosActionPerformed);
+
+        txtCantidad.addActionListener(this::txtCantidadActionPerformed);
+
+        btnAgregarCarrito.setText("Cargar");
+        btnAgregarCarrito.addActionListener(this::btnAgregarCarritoActionPerformed);
+
+        tablaCarrito.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID Prod", "Modelo", "Cantidad", "Precio Unitario", "Subtotal"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaCarrito);
+
+        lblTotal.setText("Total: $ 0.00");
+
+        btnConfirmarVenta.setText("CONFIRMAR VENTA");
+        btnConfirmarVenta.addActionListener(this::btnConfirmarVentaActionPerformed);
+
+        jLabel5.setText("Cantidad");
+
+        jLabel6.setText("Cliente");
+
+        jLabel7.setText("Producto");
+
+        javax.swing.GroupLayout panelNuevaVentaLayout = new javax.swing.GroupLayout(panelNuevaVenta);
+        panelNuevaVenta.setLayout(panelNuevaVentaLayout);
+        panelNuevaVentaLayout.setHorizontalGroup(
+            panelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                .addGroup(panelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                                .addGroup(panelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                                        .addComponent(cmbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnAgregarCarrito)))
+                                .addGap(18, 18, 18))
+                            .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                                .addGroup(panelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7)
+                                    .addComponent(lblTotal))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(btnConfirmarVenta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+        );
+        panelNuevaVentaLayout.setVerticalGroup(
+            panelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                .addGroup(panelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelNuevaVentaLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addGap(2, 2, 2)
+                        .addComponent(cmbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregarCarrito))
+                        .addGap(38, 38, 38)
+                        .addComponent(lblTotal)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnConfirmarVenta)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(panelNuevaVenta, "card5");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Ticket ID", "Fecha", "Cliente", "Vendedor", "Total"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable1);
+
+        jLabel8.setText("HISTORIAL DE VENTAS");
+
+        jButton1.setText("Generar Reporte");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        javax.swing.GroupLayout panelHistorialVentasLayout = new javax.swing.GroupLayout(panelHistorialVentas);
+        panelHistorialVentas.setLayout(panelHistorialVentasLayout);
+        panelHistorialVentasLayout.setHorizontalGroup(
+            panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHistorialVentasLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistorialVentasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistorialVentasLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(231, 231, 231))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistorialVentasLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(233, 233, 233))))
+        );
+        panelHistorialVentasLayout.setVerticalGroup(
+            panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistorialVentasLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                .addGap(24, 24, 24)
-                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificarCliente)
-                    .addComponent(btnEliminarCliente)
-                    .addComponent(btnAgregarCliente))
-                .addGap(32, 32, 32))
+                .addComponent(jButton1)
+                .addGap(44, 44, 44))
         );
 
-        panelPrincipal.add(panelClientes, "card3");
+        panelPrincipal.add(panelHistorialVentas, "card6");
 
-        getContentPane().add(panelPrincipal, "card2");
+        getContentPane().add(panelPrincipal, java.awt.BorderLayout.CENTER);
 
-        setBounds(0, 0, 599, 363);
+        jMenu1.setText("Gestión");
+
+        jMenuItem1.setText("Inventario");
+        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Clientes");
+        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Empleados");
+        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
+        jMenu1.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Caja");
+
+        jMenuItem4.setText("Nueva Venta");
+        jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Historial de Ventas");
+        jMenuItem5.addActionListener(this::jMenuItem5ActionPerformed);
+        jMenu2.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
+        setBounds(0, 0, 599, 367);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuInventarioActionPerformed
-        // TODO add your handling code here:
+        this.mostrarPanel("cardInventario");
+
+        // 2. Instanciamos tu ProductoController para que traiga la data de MySQL
+        com.mycompany.tienda.zapatillas.controller.ProductoController prodControlador = new com.mycompany.tienda.zapatillas.controller.ProductoController();
+
+        // 3. Le pasamos la tabla visual para que él la llene
+        prodControlador.llenarTabla(tablaInventario);
     }//GEN-LAST:event_btnMenuInventarioActionPerformed
 
     private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
+        controlador.abrirFormularioModificar(this);
     }//GEN-LAST:event_btnModificarClienteActionPerformed
 
     private void btnModificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEmpleadoActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.UsuarioController controlador = new com.mycompany.tienda.zapatillas.controller.UsuarioController();
+        controlador.abrirFormularioModificar(this);
     }//GEN-LAST:event_btnModificarEmpleadoActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
@@ -352,38 +585,141 @@ public void mostrarPanel(String nombreCard) {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnAgregarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEmpleadoActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.UsuarioController controlador = new com.mycompany.tienda.zapatillas.controller.UsuarioController();
+        controlador.abrirFormularioAgregar(this);
     }//GEN-LAST:event_btnAgregarEmpleadoActionPerformed
 
     private void btnEliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEmpleadoActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.UsuarioController controlador = new com.mycompany.tienda.zapatillas.controller.UsuarioController();
+        controlador.eliminarEmpleado(this);
     }//GEN-LAST:event_btnEliminarEmpleadoActionPerformed
 
     private void btnEliminarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProdActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.ProductoController controlador = new com.mycompany.tienda.zapatillas.controller.ProductoController();
+        controlador.eliminarProducto(this);
     }//GEN-LAST:event_btnEliminarProdActionPerformed
 
     private void btnModificarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProdActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.ProductoController controlador = new com.mycompany.tienda.zapatillas.controller.ProductoController();
+        controlador.abrirFormularioModificar(this);
     }//GEN-LAST:event_btnModificarProdActionPerformed
 
     private void btnAgregarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProdActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.ProductoController controlador = new com.mycompany.tienda.zapatillas.controller.ProductoController();
+        controlador.abrirFormularioAgregar(this);
     }//GEN-LAST:event_btnAgregarProdActionPerformed
 
     private void btnMenuEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuEmpleadosActionPerformed
-        // TODO add your handling code here:
+        this.mostrarPanel("cardEmpleados");
+        com.mycompany.tienda.zapatillas.controller.UsuarioController controlador = new com.mycompany.tienda.zapatillas.controller.UsuarioController();
+        controlador.llenarTabla(tablaEmpleados);
     }//GEN-LAST:event_btnMenuEmpleadosActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
+        this.mostrarPanel("cardNuevaVenta");
+        com.mycompany.tienda.zapatillas.controller.VentaController controlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
+        controlador.inicializarCaja(this);
+    }//GEN-LAST:event_btnVentaActionPerformed
+
+    private void btnMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuClientesActionPerformed
+        // 1. Cambiamos la vista al panel de Clientes
+        this.mostrarPanel("cardClientes");
+
+        // 2. Instanciamos el controlador para traer la data de MySQL
+        com.mycompany.tienda.zapatillas.controller.ClienteController clienteControlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
+
+        // 3. Le pasamos la tabla visual de clientes (asegurate que se llame tablaClientes)
+        clienteControlador.llenarTabla(tablaClientes);
+    }//GEN-LAST:event_btnMenuClientesActionPerformed
+
+    private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
+        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
+        controlador.abrirFormularioAgregar(this);
+    }//GEN-LAST:event_btnAgregarClienteActionPerformed
+
+    private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
+        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
+        controlador.eliminarCliente(this);
+    }//GEN-LAST:event_btnEliminarClienteActionPerformed
+
+    private void cmbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbProductosActionPerformed
+
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
+
+    private void btnAgregarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarritoActionPerformed
+        com.mycompany.tienda.zapatillas.controller.VentaController controlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
+        controlador.agregarAlCarrito(this);
+    }//GEN-LAST:event_btnAgregarCarritoActionPerformed
+
+    private void cmbClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbClientesActionPerformed
+
+    private void btnConfirmarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarVentaActionPerformed
+        com.mycompany.tienda.zapatillas.controller.VentaController controlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
+        controlador.confirmarVenta(this);
+    }//GEN-LAST:event_btnConfirmarVentaActionPerformed
+
+    private void btnVerHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerHistorialActionPerformed
+        this.mostrarPanel("cardHistorial");
+
+        // 2. Llamamos al controlador para que llene la tabla con las ventas reales
+        com.mycompany.tienda.zapatillas.controller.VentaController controlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
+        controlador.llenarTablaHistorial(this);
+    }//GEN-LAST:event_btnVerHistorialActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // Muestra la pantalla
+        this.mostrarPanel("cardEmpleados");
+        // Trae los datos de MySQL
+        com.mycompany.tienda.zapatillas.controller.UsuarioController usuarioControlador = new com.mycompany.tienda.zapatillas.controller.UsuarioController();
+        usuarioControlador.llenarTabla(tablaEmpleados);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // Muestra la pantalla
+        this.mostrarPanel("cardInventario");
+        // Trae los datos de MySQL
+        com.mycompany.tienda.zapatillas.controller.ProductoController prodControlador = new com.mycompany.tienda.zapatillas.controller.ProductoController();
+        prodControlador.llenarTabla(tablaInventario);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // Muestra la pantalla
+        this.mostrarPanel("cardClientes");
+        // Trae los datos de MySQL
+        com.mycompany.tienda.zapatillas.controller.ClienteController clienteControlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
+        clienteControlador.llenarTabla(tablaClientes);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // Muestra la pantalla de la caja
+        this.mostrarPanel("cardNuevaVenta");
+        // Carga los combos de productos y clientes fresquitos
+        com.mycompany.tienda.zapatillas.controller.VentaController ventaControlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
+        ventaControlador.inicializarCaja(this);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // Muestra la pantalla del historial
+        this.mostrarPanel("cardHistorial");
+        // Carga la tabla con todas las ventas que se hicieron
+        com.mycompany.tienda.zapatillas.controller.VentaController ventaControlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
+        ventaControlador.llenarTablaHistorial(this);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    // =========================================================================
+    // MÉTODO MAIN (Punto de arranque de la ventana)
+    // =========================================================================
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -394,16 +730,17 @@ public void mostrarPanel(String nombreCard) {
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MenuAdminView().setVisible(true));
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarCarrito;
     private javax.swing.JButton btnAgregarCliente;
     private javax.swing.JButton btnAgregarEmpleado;
     private javax.swing.JButton btnAgregarProd;
+    private javax.swing.JButton btnConfirmarVenta;
     private javax.swing.JButton btnEliminarCliente;
     private javax.swing.JButton btnEliminarEmpleado;
     private javax.swing.JButton btnEliminarProd;
@@ -415,27 +752,51 @@ public void mostrarPanel(String nombreCard) {
     private javax.swing.JButton btnModificarProd;
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnVenta;
+    private javax.swing.JButton btnVerHistorial;
+    private javax.swing.JComboBox<String> cmbClientes;
+    private javax.swing.JComboBox<String> cmbProductos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelDashboard;
     private javax.swing.JPanel panelEmpleados;
+    private javax.swing.JPanel panelHistorialVentas;
     private javax.swing.JPanel panelInventario;
+    private javax.swing.JPanel panelNuevaVenta;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JTable tablaCarrito;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaEmpleados;
     private javax.swing.JTable tablaInventario;
+    private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 
     public void addBtnMenuInventarioListener(ActionListener listener) {
         btnMenuInventario.addActionListener(listener);
     }
-    
+
     public void addBtnMenuClientesListener(ActionListener listener) {
         btnMenuClientes.addActionListener(listener);
     }
@@ -447,7 +808,6 @@ public void mostrarPanel(String nombreCard) {
     // ==========================================
     // SECCIÓN INVENTARIO / PRODUCTOS
     // ==========================================
-    
     public void addBtnAgregarProdListener(ActionListener listener) {
         btnAgregarProd.addActionListener(listener);
     }
@@ -466,7 +826,7 @@ public void mostrarPanel(String nombreCard) {
         if (fila != -1) {
             return (int) tablaInventario.getValueAt(fila, 0);
         }
-        return -1; 
+        return -1;
     }
 
     // Modelo para llenar la tabla de productos desde MySQL
@@ -474,10 +834,21 @@ public void mostrarPanel(String nombreCard) {
         return (javax.swing.table.DefaultTableModel) tablaInventario.getModel();
     }
 
+    public javax.swing.JTable getTablaInventario() {
+        return tablaInventario;
+    }
+
+    public javax.swing.JTable getTablaEmpleados() {
+        return tablaEmpleados;
+    }
+
+    public javax.swing.JTable getTablaHistorial() {
+        return jTable1;
+    }
+
     // ==========================================
     // SECCIÓN CLIENTES
     // ==========================================
-    
     public void addBtnAgregarClienteListener(ActionListener listener) {
         btnAgregarCliente.addActionListener(listener);
     }
@@ -494,25 +865,52 @@ public void mostrarPanel(String nombreCard) {
     public javax.swing.table.DefaultTableModel getClienteTableModel() {
         return (javax.swing.table.DefaultTableModel) tablaClientes.getModel(); // ⚠️ Asegúrate que se llame tblClientes
     }
-public void addBtnMenuVentasListener(ActionListener listener) {
-    btnVenta.addActionListener(listener);
-}
 
-
+    public void addBtnMenuVentasListener(ActionListener listener) {
+        btnVenta.addActionListener(listener);
+    }
 
     public void addbtnMenuInventarioListener(ActionListener listener) {
-        btnMenuInventario.addActionListener(listener); 
+        btnMenuInventario.addActionListener(listener);
     }
-    
+
     public void addbtnMenuClientesListener(ActionListener listener) {
-        btnMenuClientes.addActionListener(listener); 
+        btnMenuClientes.addActionListener(listener);
     }
 
     public void addbtnMenuEmpleadosListener(ActionListener listener) {
-        btnMenuEmpleados.addActionListener(listener); 
+        btnMenuEmpleados.addActionListener(listener);
     }
 
     public void addBtnVentaListener(ActionListener listener) {
-        btnVenta.addActionListener(listener); 
+        btnVenta.addActionListener(listener);
     }
+
+    public javax.swing.JTable getTablaClientes() {
+        return tablaClientes;
+    }
+
+    // ==========================================
+    // GETTERS PARA EL PANEL DE NUEVA VENTA 
+    // ==========================================
+    public javax.swing.JComboBox<String> getCmbClientes() {
+        return cmbClientes;
+    }
+
+    public javax.swing.JComboBox<String> getCmbProductos() {
+        return cmbProductos;
+    }
+
+    public javax.swing.JTextField getTxtCantidad() {
+        return txtCantidad;
+    }
+
+    public javax.swing.JTable getTablaCarrito() {
+        return tablaCarrito;
+    }
+
+    public javax.swing.JLabel getLblTotal() {
+        return lblTotal;
+    }
+
 }

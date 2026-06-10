@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package com.mycompany.tienda.zapatillas.view.abm;
+
 import java.awt.event.ActionListener;
 
 /**
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
  * @author Usuario
  */
 public class FormularioClienteDialog extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormularioClienteDialog.class.getName());
 
     /**
@@ -19,10 +20,10 @@ public class FormularioClienteDialog extends javax.swing.JDialog {
     public FormularioClienteDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    this.setSize(400, 450); // Tamaño ideal para un formulario vertical
-    this.setLocationRelativeTo(parent); // Hace que aparezca centrado sobre el menú
-    this.setResizable(false); // Evita que lo deformen
-}
+        this.setSize(400, 450); // Tamaño ideal para un formulario vertical
+        this.setLocationRelativeTo(parent); // Hace que aparezca centrado sobre el menú
+        this.setResizable(false); // Evita que lo deformen
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,27 +74,28 @@ public class FormularioClienteDialog extends javax.swing.JDialog {
                         .addGap(148, 148, 148)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnGuardar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(160, 160, 160)
+                        .addComponent(btnGuardar)))
                 .addContainerGap(127, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombreCliente)
+                    .addComponent(txtApellido)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,9 +107,9 @@ public class FormularioClienteDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
-                .addGap(36, 36, 36))
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -126,7 +128,9 @@ public class FormularioClienteDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
+        com.mycompany.tienda.zapatillas.view.menus.MenuAdminView menu = (com.mycompany.tienda.zapatillas.view.menus.MenuAdminView) this.getParent();
+        controlador.procesarGuardado(this, menu);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
@@ -169,22 +173,32 @@ public class FormularioClienteDialog extends javax.swing.JDialog {
     // MÉTODOS PÚBLICOS PARA EL CONTROLADOR (MVC)
     // ==========================================
 
-    public String getNombre() { 
-        return txtNombreCliente.getText().trim(); 
+    private int idClienteActual = -1;
+
+    public int getIdClienteActual() {
+        return idClienteActual;
     }
 
-    public String getStock() { 
-        return txtApellido.getText().trim(); 
+    public void setIdClienteActual(int idClienteActual) {
+        this.idClienteActual = idClienteActual;
     }
 
-    public String getPrecio() { 
-        return txtCorreo.getText().trim(); 
+    public String getNombre() {
+        return txtNombreCliente.getText().trim();
     }
 
-    public void setFormulario(String nombre, int stock, double precio) {
+    public String getApellido() {
+        return txtApellido.getText().trim();
+    }
+
+    public String getCorreo() {
+        return txtCorreo.getText().trim();
+    }
+
+    public void setFormulario(String nombre, String apellido, String correo) {
         txtNombreCliente.setText(nombre);
-        txtApellido.setText(String.valueOf(stock));
-        txtCorreo.setText(String.valueOf(precio));
+        txtApellido.setText(apellido);
+        txtCorreo.setText(correo);
     }
 
     public void limpiarFormulario() {

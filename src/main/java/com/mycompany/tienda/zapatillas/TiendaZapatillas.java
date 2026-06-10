@@ -9,7 +9,7 @@ public class TiendaZapatillas {
         // Ejecutamos la interfaz gráfica de forma segura en el hilo de Swing
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                // Instanciamos tu vista del Login y la hacemos visible
+                // Instanciamos la vista del Login y la hacemos visible
                 LoginView login = new LoginView();
                 login.setVisible(true);
                 login.setLocationRelativeTo(null); // Esto la centra en la pantalla

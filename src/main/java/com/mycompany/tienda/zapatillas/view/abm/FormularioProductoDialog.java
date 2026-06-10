@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package com.mycompany.tienda.zapatillas.view.abm;
+
 import java.awt.event.ActionListener;
 
 /**
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
  * @author Usuario
  */
 public class FormularioProductoDialog extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormularioProductoDialog.class.getName());
 
     /**
@@ -19,10 +20,10 @@ public class FormularioProductoDialog extends javax.swing.JDialog {
     public FormularioProductoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    this.setSize(400, 450); // Tamaño ideal para un formulario vertical
-    this.setLocationRelativeTo(parent); // Hace que aparezca centrado sobre el menú
-    this.setResizable(false); // Evita que lo deformen
-}
+        this.setSize(400, 450); // Tamaño ideal para un formulario vertical
+        this.setLocationRelativeTo(parent); // Hace que aparezca centrado sobre el menú
+        this.setResizable(false); // Evita que lo deformen
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,13 +42,15 @@ public class FormularioProductoDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtMarca = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestionar Producto");
 
         jLabel1.setText("Datos del producto");
 
-        jLabel2.setText("Modelo/Nombre:");
+        jLabel2.setText("Modelo:");
 
         txtNombre.addActionListener(this::txtNombreActionPerformed);
 
@@ -63,37 +66,47 @@ public class FormularioProductoDialog extends javax.swing.JDialog {
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
+        jLabel5.setText("Marca");
+
+        txtMarca.addActionListener(this::txtMarcaActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
+                        .addGap(107, 107, 107)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnGuardar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombre)
+                            .addComponent(txtStock)
+                            .addComponent(txtPrecio)
+                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(127, Short.MAX_VALUE))
+                                .addGap(9, 9, 9)
+                                .addComponent(btnGuardar)))))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,9 +118,9 @@ public class FormularioProductoDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addComponent(btnGuardar)
-                .addGap(36, 36, 36))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -126,8 +139,15 @@ public class FormularioProductoDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPrecioActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.ProductoController controlador = new com.mycompany.tienda.zapatillas.controller.ProductoController();
+        // Le pasamos el diálogo (this) y extraemos el menú principal de atrás para que pueda refrescar la tabla
+        com.mycompany.tienda.zapatillas.view.menus.MenuAdminView menu = (com.mycompany.tienda.zapatillas.view.menus.MenuAdminView) this.getParent();
+        controlador.procesarGuardado(this, menu);
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMarcaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,32 +189,47 @@ public class FormularioProductoDialog extends javax.swing.JDialog {
     // MÉTODOS PÚBLICOS PARA EL CONTROLADOR (MVC)
     // ==========================================
 
-    public String getNombre() { 
-        return txtNombre.getText().trim(); 
+    private int idProductoActual = -1;
+
+    public int getIdProductoActual() {
+        return idProductoActual;
     }
 
-    public String getStock() { 
-        return txtStock.getText().trim(); 
+    public void setIdProductoActual(int idProductoActual) {
+        this.idProductoActual = idProductoActual;
     }
 
-    public String getPrecio() { 
-        return txtPrecio.getText().trim(); 
+    // Getters de los campos de texto
+    public String getMarca() {
+        return txtMarca.getText().trim();
     }
 
-    public void setFormulario(String nombre, int stock, double precio) {
-        txtNombre.setText(nombre);
+    public String getModelo() {
+        return txtNombre.getText().trim();
+    } // Este es el Modelo
+
+    public String getStock() {
+        return txtStock.getText().trim();
+    }
+
+    public String getPrecio() {
+        return txtPrecio.getText().trim();
+    }
+
+    // Método para rellenar los datos cuando tocás "Modificar"
+    public void setFormulario(String marca, String modelo, int stock, double precio) {
+        txtMarca.setText(marca);
+        txtNombre.setText(modelo);
         txtStock.setText(String.valueOf(stock));
         txtPrecio.setText(String.valueOf(precio));
     }
 
+    // Método para vaciar todo cuando tocás "Agregar"
     public void limpiarFormulario() {
+        txtMarca.setText("");
         txtNombre.setText("");
         txtStock.setText("");
         txtPrecio.setText("");
-    }
-
-    public void addBtnGuardarListener(ActionListener listener) {
-        btnGuardar.addActionListener(listener);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
@@ -202,6 +237,8 @@ public class FormularioProductoDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtStock;

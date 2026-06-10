@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package com.mycompany.tienda.zapatillas.view.abm;
+
 import java.awt.event.ActionListener;
 
 /**
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
  * @author Usuario
  */
 public class FormularioEmpleadoDialog extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormularioEmpleadoDialog.class.getName());
 
     /**
@@ -19,10 +20,10 @@ public class FormularioEmpleadoDialog extends javax.swing.JDialog {
     public FormularioEmpleadoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    this.setSize(400, 450); // Tamaño ideal para un formulario vertical
-    this.setLocationRelativeTo(parent); // Hace que aparezca centrado sobre el menú
-    this.setResizable(false); // Evita que lo deformen
-}
+        this.setSize(400, 450); // Tamaño ideal para un formulario vertical
+        this.setLocationRelativeTo(parent); // Hace que aparezca centrado sobre el menú
+        this.setResizable(false); // Evita que lo deformen
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,36 +75,36 @@ public class FormularioEmpleadoDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(btnGuardar)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPassword)
+                            .addComponent(txtCorreo)
+                            .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(66, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(141, 141, 141))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnGuardar)
+                        .addGap(160, 160, 160))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -115,11 +116,11 @@ public class FormularioEmpleadoDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardar)
-                .addGap(50, 50, 50))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -134,7 +135,9 @@ public class FormularioEmpleadoDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        com.mycompany.tienda.zapatillas.controller.UsuarioController controlador = new com.mycompany.tienda.zapatillas.controller.UsuarioController();
+        com.mycompany.tienda.zapatillas.view.menus.MenuAdminView menu = (com.mycompany.tienda.zapatillas.view.menus.MenuAdminView) this.getParent();
+        controlador.procesarGuardadoEmpleado(this, menu);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
@@ -185,44 +188,49 @@ public class FormularioEmpleadoDialog extends javax.swing.JDialog {
     // MÉTODOS PÚBLICOS PARA EL CONTROLADOR (MVC)
     // ==========================================
 
-// ==========================================
-    // MÉTODOS PÚBLICOS PARA EL CONTROLADOR (MVC)
-    // ==========================================
+    private int idUsuarioActual = -1;
 
-    // Lee el nombre del empleado
-    public String getNombre() { 
-        return txtNombreEmpleado.getText().trim(); 
+    public int getIdUsuarioActual() {
+        return idUsuarioActual;
     }
 
-    // Lee el correo electrónico
-    public String getCorreo() { 
-        return txtCorreo.getText().trim(); 
+    public void setIdUsuarioActual(int idUsuarioActual) {
+        this.idUsuarioActual = idUsuarioActual;
     }
 
-    // Lee la contraseña (se usa la forma segura para JPasswordField)
-    public String getPassword() { 
-        return new String(txtPassword.getPassword()).trim(); 
+    public String getNombre() {
+        return txtNombreEmpleado.getText().trim();
     }
 
-    // Lee el rol seleccionado del ComboBox ("Administrador" o "Empleado")
-    public String getRol() { 
-        return cmbRol.getSelectedItem().toString(); 
+    public String getCorreo() {
+        return txtCorreo.getText().trim();
     }
 
-    // Llena el formulario cuando tus compañeros quieran MODIFICAR un empleado existente
+    public String getPassword() {
+        return new String(txtPassword.getPassword()).trim();
+    }
+
+    public String getRol() {
+        return cmbRol.getSelectedItem().toString();
+    }
+
     public void setFormulario(String nombre, String correo, String rol) {
         txtNombreEmpleado.setText(nombre);
         txtCorreo.setText(correo);
-        cmbRol.setSelectedItem(rol);
-        txtPassword.setText(""); // Por seguridad, la contraseña se deja vacía al editar
+        // Traducimos lo que viene de la BD a lo que muestra el ComboBox
+        if (rol.equals("ADMIN")) {
+            cmbRol.setSelectedItem("Administrador");
+        } else {
+            cmbRol.setSelectedItem("Empleado");
+        }
+        txtPassword.setText(""); // Vaciamos por seguridad
     }
 
-    // Limpia todos los campos para un nuevo registro
     public void limpiarFormulario() {
         txtNombreEmpleado.setText("");
         txtCorreo.setText("");
         txtPassword.setText("");
-        cmbRol.setSelectedIndex(0); // Vuelve a la primera opción
+        cmbRol.setSelectedIndex(0);
     }
 
     // Escuchador del botón Guardar

@@ -115,7 +115,11 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+       // Instanciamos el controlador
+        com.mycompany.tienda.zapatillas.controller.UsuarioController controlador = new com.mycompany.tienda.zapatillas.controller.UsuarioController();
+        
+        // Le pasamos "this" (esta misma ventana) para que el controlador haga su magia
+        controlador.procesarLogin(this);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
