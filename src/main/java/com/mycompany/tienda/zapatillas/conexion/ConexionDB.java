@@ -7,7 +7,7 @@ public class ConexionDB {
     // Credenciales de MySQL 
     private static final String URL = "jdbc:mysql://localhost:3306/tienda_zapatillas"; 
     private static final String USER = "root"; 
-    private static final String PASSWORD = "contraseña"; 
+    private static final String PASSWORD = ""; 
 
     public static Connection conectar() {
         Connection con = null;

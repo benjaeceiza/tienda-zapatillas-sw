@@ -1,6 +1,7 @@
 package com.mycompany.tienda.zapatillas.view.menus;
 
 import java.awt.event.ActionListener;
+import javax.swing.JTable;
 
 /**
  * Vista Principal del Administrador. Actúa como el contenedor maestro donde se
@@ -64,6 +65,7 @@ public class MenuAdminView extends javax.swing.JFrame {
         btnModificarCliente = new javax.swing.JButton();
         btnEliminarCliente = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        txtBuscarClientes = new javax.swing.JTextField();
         panelEmpleados = new javax.swing.JPanel();
         btnAgregarEmpleado = new javax.swing.JButton();
         btnModificarEmpleado = new javax.swing.JButton();
@@ -71,6 +73,7 @@ public class MenuAdminView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaEmpleados = new javax.swing.JTable();
+        txtBuscarUsuarios = new javax.swing.JTextField();
         panelInventario = new javax.swing.JPanel();
         btnReportes = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -79,6 +82,7 @@ public class MenuAdminView extends javax.swing.JFrame {
         btnModificarProd = new javax.swing.JButton();
         btnAgregarProd = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
         panelNuevaVenta = new javax.swing.JPanel();
         cmbClientes = new javax.swing.JComboBox<>();
         cmbProductos = new javax.swing.JComboBox<>();
@@ -93,7 +97,7 @@ public class MenuAdminView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         panelHistorialVentas = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaHistorial = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -194,6 +198,7 @@ public class MenuAdminView extends javax.swing.JFrame {
         btnEliminarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarCliente.addActionListener(this::btnEliminarClienteActionPerformed);
 
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setText("LISTADO DE CLIENTES");
 
         javax.swing.GroupLayout panelClientesLayout = new javax.swing.GroupLayout(panelClientes);
@@ -203,33 +208,38 @@ public class MenuAdminView extends javax.swing.JFrame {
             .addGroup(panelClientesLayout.createSequentialGroup()
                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelClientesLayout.createSequentialGroup()
-                        .addGap(121, 121, 121)
+                        .addGap(123, 123, 123)
                         .addComponent(btnAgregarCliente)
-                        .addGap(49, 49, 49)
+                        .addGap(41, 41, 41)
                         .addComponent(btnModificarCliente)
-                        .addGap(40, 40, 40)
+                        .addGap(47, 47, 47)
                         .addComponent(btnEliminarCliente))
                     .addGroup(panelClientesLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelClientesLayout.createSequentialGroup()
-                        .addGap(215, 215, 215)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelClientesLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtBuscarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         panelClientesLayout.setVerticalGroup(
             panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelClientesLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                .addGap(24, 24, 24)
                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtBuscarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                .addGap(124, 124, 124)
+                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarCliente)
                     .addComponent(btnModificarCliente)
-                    .addComponent(btnEliminarCliente)
-                    .addComponent(btnAgregarCliente))
-                .addGap(32, 32, 32))
+                    .addComponent(btnEliminarCliente))
+                .addGap(16, 16, 16))
         );
 
         panelPrincipal.add(panelClientes, "card3");
@@ -249,6 +259,7 @@ public class MenuAdminView extends javax.swing.JFrame {
         btnEliminarEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarEmpleado.addActionListener(this::btnEliminarEmpleadoActionPerformed);
 
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("LISTADO DE EMPLEADOS");
 
         tablaEmpleados.setModel(new javax.swing.table.DefaultTableModel(
@@ -264,41 +275,51 @@ public class MenuAdminView extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tablaEmpleados);
 
+        txtBuscarUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarUsuariosKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelEmpleadosLayout = new javax.swing.GroupLayout(panelEmpleados);
         panelEmpleados.setLayout(panelEmpleadosLayout);
         panelEmpleadosLayout.setHorizontalGroup(
             panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEmpleadosLayout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
+                .addGap(55, 55, 55)
                 .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadosLayout.createSequentialGroup()
-                        .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelEmpleadosLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregarEmpleado)
+                        .addGap(46, 46, 46)
+                        .addComponent(btnModificarEmpleado)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnEliminarEmpleado)
+                        .addGap(120, 120, 120))
+                    .addGroup(panelEmpleadosLayout.createSequentialGroup()
+                        .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(panelEmpleadosLayout.createSequentialGroup()
-                                .addComponent(btnAgregarEmpleado)
-                                .addGap(48, 48, 48)
-                                .addComponent(btnModificarEmpleado)
-                                .addGap(44, 44, 44)
-                                .addComponent(btnEliminarEmpleado)
-                                .addGap(37, 37, 37)))
-                        .addGap(81, 81, 81))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadosLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(221, 221, 221))))
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtBuscarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(34, Short.MAX_VALUE))))
         );
         panelEmpleadosLayout.setVerticalGroup(
             panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadosLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(33, 33, 33)
                 .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminarEmpleado)
+                    .addComponent(jLabel2)
+                    .addComponent(txtBuscarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarEmpleado)
                     .addComponent(btnModificarEmpleado)
-                    .addComponent(btnAgregarEmpleado))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(btnEliminarEmpleado))
+                .addGap(43, 43, 43))
         );
 
         panelPrincipal.add(panelEmpleados, "card2");
@@ -331,46 +352,56 @@ public class MenuAdminView extends javax.swing.JFrame {
         btnAgregarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProd.addActionListener(this::btnAgregarProdActionPerformed);
 
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("INVENTARIO");
+
+        txtBuscar.addActionListener(this::txtBuscarActionPerformed);
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelInventarioLayout = new javax.swing.GroupLayout(panelInventario);
         panelInventario.setLayout(panelInventarioLayout);
         panelInventarioLayout.setHorizontalGroup(
             panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInventarioLayout.createSequentialGroup()
-                .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(68, 68, 68)
+                .addComponent(btnAgregarProd)
+                .addGap(52, 52, 52)
+                .addComponent(btnModificarProd)
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminarProd)
+                .addGap(70, 70, 70)
+                .addComponent(btnReportes)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelInventarioLayout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelInventarioLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelInventarioLayout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(jLabel4))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelInventarioLayout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(btnAgregarProd)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificarProd)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarProd)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnReportes)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         panelInventarioLayout.setVerticalGroup(
             panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInventarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
                 .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReportes)
-                    .addComponent(btnEliminarProd)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarProd)
                     .addComponent(btnModificarProd)
-                    .addComponent(btnAgregarProd))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(btnEliminarProd)
+                    .addComponent(btnReportes))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         panelPrincipal.add(panelInventario, "card4");
@@ -475,7 +506,7 @@ public class MenuAdminView extends javax.swing.JFrame {
 
         panelPrincipal.add(panelNuevaVenta, "card5");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -486,7 +517,7 @@ public class MenuAdminView extends javax.swing.JFrame {
                 "Ticket ID", "Fecha", "Cliente", "Vendedor", "Total"
             }
         ));
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(tablaHistorial);
 
         jLabel8.setText("HISTORIAL DE VENTAS");
 
@@ -571,8 +602,12 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuInventarioActionPerformed
 
     private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
-        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
-        controlador.abrirFormularioModificar(this);
+        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = 
+        new com.mycompany.tienda.zapatillas.controller.ClienteController();
+    
+    // AQUÍ ESTÁ EL CAMBIO: pasamos 'this' Y 'this.tablaClientes'
+    // Asegúrate de que 'tablaClientes' sea el nombre de tu tabla en el diseño (o cámbialo por el nombre real)
+        controlador.abrirFormularioModificar(this, this.tablaClientes);
     }//GEN-LAST:event_btnModificarClienteActionPerformed
 
     private void btnModificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEmpleadoActionPerformed
@@ -617,8 +652,7 @@ public class MenuAdminView extends javax.swing.JFrame {
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
         this.mostrarPanel("cardNuevaVenta");
-        com.mycompany.tienda.zapatillas.controller.VentaController controlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
-        controlador.inicializarCaja(this);
+        new com.mycompany.tienda.zapatillas.controller.VentaController().inicializarCaja(this.tablaCarrito, this.lblTotal, this.txtCantidad, this.cmbClientes, this.cmbProductos);
     }//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuClientesActionPerformed
@@ -633,13 +667,13 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuClientesActionPerformed
 
     private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
-        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
-        controlador.abrirFormularioAgregar(this);
+        new com.mycompany.tienda.zapatillas.controller.ClienteController()
+        .abrirFormularioModificar(this, this.tablaClientes);
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
     private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
-        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
-        controlador.eliminarCliente(this);
+       new com.mycompany.tienda.zapatillas.controller.ClienteController()
+        .eliminarCliente(this, this.tablaClientes);
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
     private void cmbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductosActionPerformed
@@ -651,8 +685,7 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void btnAgregarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarritoActionPerformed
-        com.mycompany.tienda.zapatillas.controller.VentaController controlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
-        controlador.agregarAlCarrito(this);
+        new com.mycompany.tienda.zapatillas.controller.VentaController().agregarAlCarrito(this, this.tablaCarrito, this.cmbClientes, this.cmbProductos, this.txtCantidad, this.lblTotal);
     }//GEN-LAST:event_btnAgregarCarritoActionPerformed
 
     private void cmbClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClientesActionPerformed
@@ -660,16 +693,14 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbClientesActionPerformed
 
     private void btnConfirmarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarVentaActionPerformed
-        com.mycompany.tienda.zapatillas.controller.VentaController controlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
-        controlador.confirmarVenta(this);
+       new com.mycompany.tienda.zapatillas.controller.VentaController().confirmarVenta(this, this.tablaCarrito, this.cmbClientes, this.lblTotal);
     }//GEN-LAST:event_btnConfirmarVentaActionPerformed
 
     private void btnVerHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerHistorialActionPerformed
         this.mostrarPanel("cardHistorial");
 
         // 2. Llamamos al controlador para que llene la tabla con las ventas reales
-        com.mycompany.tienda.zapatillas.controller.VentaController controlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
-        controlador.llenarTablaHistorial(this);
+        new com.mycompany.tienda.zapatillas.controller.VentaController().llenarTablaHistorial(this.tablaHistorial);
     }//GEN-LAST:event_btnVerHistorialActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -700,21 +731,38 @@ public class MenuAdminView extends javax.swing.JFrame {
         // Muestra la pantalla de la caja
         this.mostrarPanel("cardNuevaVenta");
         // Carga los combos de productos y clientes fresquitos
-        com.mycompany.tienda.zapatillas.controller.VentaController ventaControlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
-        ventaControlador.inicializarCaja(this);
+       new com.mycompany.tienda.zapatillas.controller.VentaController().inicializarCaja(this.tablaCarrito, this.lblTotal, this.txtCantidad, this.cmbClientes, this.cmbProductos);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // Muestra la pantalla del historial
         this.mostrarPanel("cardHistorial");
         // Carga la tabla con todas las ventas que se hicieron
-        com.mycompany.tienda.zapatillas.controller.VentaController ventaControlador = new com.mycompany.tienda.zapatillas.controller.VentaController();
-        ventaControlador.llenarTablaHistorial(this);
+       new com.mycompany.tienda.zapatillas.controller.VentaController().llenarTablaHistorial(this.tablaHistorial);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        if (txtBuscar.getText().isEmpty()) {
+            new com.mycompany.tienda.zapatillas.controller.ProductoController().llenarTabla(tablaInventario);
+        } else {
+            // Si hay texto, filtramos
+            new com.mycompany.tienda.zapatillas.controller.ProductoController().filtrarTabla(tablaInventario, txtBuscar.getText());
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void txtBuscarUsuariosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarUsuariosKeyReleased
+        String filtro = txtBuscarUsuarios.getText();
+    // Llamamos al controlador de usuarios específicamente
+    new com.mycompany.tienda.zapatillas.controller.UsuarioController().filtrarTabla(tablaEmpleados, filtro);
+    }//GEN-LAST:event_txtBuscarUsuariosKeyReleased
 
     // =========================================================================
     // MÉTODO MAIN (Punto de arranque de la ventana)
@@ -777,7 +825,6 @@ public class MenuAdminView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelDashboard;
@@ -789,7 +836,11 @@ public class MenuAdminView extends javax.swing.JFrame {
     private javax.swing.JTable tablaCarrito;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaEmpleados;
+    private javax.swing.JTable tablaHistorial;
     private javax.swing.JTable tablaInventario;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtBuscarClientes;
+    private javax.swing.JTextField txtBuscarUsuarios;
     private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 
@@ -843,7 +894,7 @@ public class MenuAdminView extends javax.swing.JFrame {
     }
 
     public javax.swing.JTable getTablaHistorial() {
-        return jTable1;
+        return tablaHistorial;
     }
 
     // ==========================================

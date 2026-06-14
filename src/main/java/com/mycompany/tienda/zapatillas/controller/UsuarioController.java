@@ -5,6 +5,8 @@ import com.mycompany.tienda.zapatillas.model.Usuario;
 import com.mycompany.tienda.zapatillas.view.login.LoginView;
 import com.mycompany.tienda.zapatillas.view.menus.MenuAdminView;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class UsuarioController {
 
@@ -38,11 +40,16 @@ public class UsuarioController {
                 // Cerramos la ventana de login
                 vistaLogin.dispose();
 
-            } else {
-                // Por ahora mostramos un cartelito hasta que armes el menú de empleado
-                JOptionPane.showMessageDialog(vistaLogin, "Sos empleado. Próximamente abriremos tu menú.");
-            }
+            } else if (usuarioLogueado.getRol().equals("USER")) { // Asegúrate que coincida con lo que guarda tu BD
+                // ¡Es empleado! Abrimos el menú de empleado
+                com.mycompany.tienda.zapatillas.view.menus.MenuEmpleadoView menuEmpleado = new com.mycompany.tienda.zapatillas.view.menus.MenuEmpleadoView();
+                menuEmpleado.setVisible(true);
+                menuEmpleado.setLocationRelativeTo(null); 
 
+                // Cerramos el login
+                vistaLogin.dispose();
+            }
+// ... 
         } else {
             // Si el DAO devolvió null, le pifió a la clave o al correo
             JOptionPane.showMessageDialog(vistaLogin, "Correo o contraseña incorrectos.", "Error de Login", JOptionPane.ERROR_MESSAGE);
@@ -134,4 +141,20 @@ public class UsuarioController {
             llenarTabla(menu.getTablaEmpleados());
         }
     }
+    
+public void filtrarTabla(JTable tabla, String busqueda) {
+    DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+    modelo.setRowCount(0);
+    
+    for (Usuario urs : usuarioDAO.filtrarUsuarios(busqueda)) {
+        // Quitamos el setPassword y corregimos la sintaxis
+        modelo.addRow(new Object[]{
+            urs.getIdUsuario(), 
+            urs.getNombre(), 
+            urs.getEmail(),
+            urs.getRol() // Mostramos solo datos de lectura, no contraseñas
+        });
+    }
+}
+
 }

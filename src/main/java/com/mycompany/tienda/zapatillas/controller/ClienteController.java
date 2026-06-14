@@ -33,33 +33,37 @@ public class ClienteController {
     }
     
     // Abre el formulario vacío
-    public void abrirFormularioAgregar(com.mycompany.tienda.zapatillas.view.menus.MenuAdminView menu) {
-        com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog form = new com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog(menu, true);
-        form.limpiarFormulario();
-        form.setIdClienteActual(-1); 
-        form.setVisible(true);
-    }
+    public void abrirFormularioAgregar(javax.swing.JFrame padre, javax.swing.JTable tabla) {
+    com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog form = 
+        new com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog(padre, true);
+    form.limpiarFormulario();
+    form.setIdClienteActual(-1); 
+    form.setVisible(true);
+    llenarTabla(tabla); // Esto refresca la tabla al cerrar
+}
 
     // Lee la tabla y abre el formulario lleno
-    public void abrirFormularioModificar(com.mycompany.tienda.zapatillas.view.menus.MenuAdminView menu) {
-        // Asegurate de tener este getter creado en tu MenuAdminView
-        int fila = menu.getClienteTableModel().getRowCount() > 0 ? menu.getTablaClientes().getSelectedRow() : -1; 
-        
-        if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(menu, "Seleccioná un cliente de la tabla primero.");
-            return;
-        }
-
-        int id = Integer.parseInt(menu.getTablaClientes().getValueAt(fila, 0).toString());
-        String nombre = menu.getTablaClientes().getValueAt(fila, 1).toString();
-        String apellido = menu.getTablaClientes().getValueAt(fila, 2).toString();
-        String correo = menu.getTablaClientes().getValueAt(fila, 3).toString();
-
-        com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog form = new com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog(menu, true);
-        form.setFormulario(nombre, apellido, correo);
-        form.setIdClienteActual(id); 
-        form.setVisible(true);
+    public void abrirFormularioModificar(javax.swing.JFrame padre, javax.swing.JTable tabla) {
+    
+    // Obtenemos la fila de la tabla que nos pasaron
+    int fila = tabla.getSelectedRow();
+    
+    if (fila == -1) {
+        javax.swing.JOptionPane.showMessageDialog(padre, "Seleccioná un cliente de la tabla primero.");
+        return;
     }
+
+    int id = Integer.parseInt(tabla.getValueAt(fila, 0).toString());
+    String nombre = tabla.getValueAt(fila, 1).toString();
+    String apellido = tabla.getValueAt(fila, 2).toString();
+    String correo = tabla.getValueAt(fila, 3).toString();
+
+    com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog form = 
+        new com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog(padre, true);
+    form.setFormulario(nombre, apellido, correo);
+    form.setIdClienteActual(id); 
+    form.setVisible(true);
+}
 
     // Guarda los datos (Insert o Update)
     public void procesarGuardado(com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog form, com.mycompany.tienda.zapatillas.view.menus.MenuAdminView menu) {
@@ -80,23 +84,42 @@ public class ClienteController {
     }
 
     // Procesa la eliminación
-    public void eliminarCliente(com.mycompany.tienda.zapatillas.view.menus.MenuAdminView menu) {
-        int fila = menu.getTablaClientes().getSelectedRow();
-        if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(menu, "Seleccioná un cliente de la tabla primero.");
-            return;
-        }
-
-        int id = Integer.parseInt(menu.getTablaClientes().getValueAt(fila, 0).toString());
-        String nombre = menu.getTablaClientes().getValueAt(fila, 1).toString();
-
-        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(menu, 
-                "¿Estás seguro que querés eliminar al cliente " + nombre + "?", 
-                "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
-
-        if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
-            clienteDAO.eliminarCliente(id);
-            llenarTabla(menu.getTablaClientes());
-        }
+    public void eliminarCliente(javax.swing.JFrame padre, javax.swing.JTable tabla) {
+    // Usamos 'tabla' en lugar de 'menu.getTablaClientes()'
+    int fila = tabla.getSelectedRow();
+    
+    if (fila == -1) {
+        javax.swing.JOptionPane.showMessageDialog(padre, "Seleccioná un cliente de la tabla primero.");
+        return;
     }
+
+    // Obtenemos los datos desde la tabla que recibimos
+    int id = Integer.parseInt(tabla.getValueAt(fila, 0).toString());
+    String nombre = tabla.getValueAt(fila, 1).toString();
+
+    int confirmacion = javax.swing.JOptionPane.showConfirmDialog(padre, 
+            "¿Estás seguro que querés eliminar al cliente " + nombre + "?", 
+            "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
+
+    if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+        clienteDAO.eliminarCliente(id);
+        // Refrescamos la tabla que recibimos
+        llenarTabla(tabla);
+    }
+}
+    
+public void filtrarTabla(JTable tabla, String busqueda) {
+    DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+    modelo.setRowCount(0);
+    
+    for (Cliente c : clienteDAO.filtrarClientes(busqueda)) {
+        modelo.addRow(new Object[]{
+            c.getIdCliente(), 
+            c.getNombre(), 
+            c.getApellido(), 
+            c.getEmail()
+        });
+    }
+}
+    
 }

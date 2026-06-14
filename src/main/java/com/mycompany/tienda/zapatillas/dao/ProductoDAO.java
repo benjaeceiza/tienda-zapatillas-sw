@@ -3,6 +3,7 @@ package com.mycompany.tienda.zapatillas.dao;
 import com.mycompany.tienda.zapatillas.conexion.ConexionDB;
 import com.mycompany.tienda.zapatillas.model.Producto;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -133,4 +134,35 @@ public class ProductoDAO {
             return false;
         }
     }
+    
+    public List<Producto> filtrarProductos(String busqueda) {
+    List<Producto> lista = new ArrayList<>();
+    String sql = "SELECT * FROM productos WHERE marca LIKE ? OR modelo LIKE ?";
+    try (Connection con = ConexionDB.conectar(); 
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        
+        ps.setString(1, "%" + busqueda + "%"); 
+        ps.setString(2, "%" + busqueda + "%");
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            // 1. Crear la instancia del objeto
+            Producto prod = new Producto();
+            
+            // 2. Mapear los datos desde el ResultSet al objeto
+            prod.setIdProducto(rs.getInt("id_producto"));
+            prod.setMarca(rs.getString("marca"));
+            prod.setModelo(rs.getString("modelo"));
+            prod.setPrecio(rs.getDouble("precio"));
+            prod.setStock(rs.getInt("stock"));
+            
+            // 3. AGREGAR EL OBJETO (la variable 'prod', no la clase 'Producto')
+            lista.add(prod); 
+        }
+    } catch (Exception e) { 
+        e.printStackTrace(); 
+    }
+    return lista;
+}
+    
 }

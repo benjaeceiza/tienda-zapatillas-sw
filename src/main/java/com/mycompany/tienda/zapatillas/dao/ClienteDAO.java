@@ -85,4 +85,27 @@ public class ClienteDAO {
             return false;
         }
     }
+    
+    public List<Cliente> filtrarClientes(String busqueda) {
+    List<Cliente> lista = new ArrayList<>();
+    String sql = "SELECT * FROM clientes WHERE nombre LIKE ? OR apellido LIKE ?";
+    try (Connection con = ConexionDB.conectar(); 
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        
+        ps.setString(1, "%" + busqueda + "%");
+        ps.setString(2, "%" + busqueda + "%");
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Cliente cli = new Cliente();
+            cli.setIdCliente(rs.getInt("id_cliente"));
+            cli.setNombre(rs.getString("nombre"));
+            cli.setApellido(rs.getString("apellido"));
+            cli.setEmail(rs.getString("email"));
+            lista.add(cli);
+        }
+    } catch (Exception e) { e.printStackTrace(); }
+    return lista;
+}
+    
 }

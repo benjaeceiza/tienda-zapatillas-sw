@@ -1,7 +1,12 @@
 package com.mycompany.tienda.zapatillas.controller;
 
+import com.mycompany.tienda.zapatillas.conexion.ConexionDB;
 import com.mycompany.tienda.zapatillas.dao.ProductoDAO;
 import com.mycompany.tienda.zapatillas.model.Producto;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -124,4 +129,21 @@ public class ProductoController {
             }
         }
     }
+    
+   public void filtrarTabla(JTable tabla, String busqueda) {
+    DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+    modelo.setRowCount(0); // Limpias la tabla
+    
+    // Llamamos al DAO y recorremos la lista
+    for (Producto p : productoDAO.filtrarProductos(busqueda)) {
+        // CORRECCIÓN: Asegúrate de llamar a getIdProducto() si así se llama en tu modelo
+        modelo.addRow(new Object[]{
+            p.getIdProducto(), 
+            p.getMarca(), 
+            p.getModelo(), 
+            p.getPrecio(), 
+            p.getStock()
+        });
+    }
+}
 }

@@ -5,6 +5,8 @@ import com.mycompany.tienda.zapatillas.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDAO {
 
@@ -117,4 +119,35 @@ public class UsuarioDAO {
             return false;
         }
     }
+    
+    public List<Usuario> filtrarUsuarios(String busqueda) {
+    List<Usuario> lista = new ArrayList<>();
+    String sql = "SELECT * FROM usuarios WHERE nombre LIKE ? OR email LIKE ?";
+    try (Connection con = ConexionDB.conectar(); 
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        
+        ps.setString(1, "%" + busqueda + "%"); 
+        ps.setString(2, "%" + busqueda + "%");
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            // 1. Crear la instancia del objeto
+            Usuario usr = new Usuario();
+            
+            // 2. Mapear los datos desde el ResultSet al objeto
+            usr.setIdUsuario(rs.getInt("id_usuario"));
+            usr.setNombre(rs.getString("nombre"));
+            usr.setEmail(rs.getString("email"));
+            usr.setPassword(rs.getString("password"));
+            usr.setRol(rs.getString("rol"));
+            
+            // 3. AGREGAR EL OBJETO (la variable 'prod', no la clase 'Producto')
+            lista.add(usr); 
+        }
+    } catch (Exception e) { 
+        e.printStackTrace(); 
+    }
+    return lista;
+}
+    
 }
