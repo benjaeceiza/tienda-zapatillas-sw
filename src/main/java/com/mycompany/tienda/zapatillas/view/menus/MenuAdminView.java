@@ -57,6 +57,7 @@ public class MenuAdminView extends javax.swing.JFrame {
         btnVenta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnVerHistorial = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         panelPrincipal = new javax.swing.JPanel();
         panelClientes = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -126,44 +127,57 @@ public class MenuAdminView extends javax.swing.JFrame {
         btnVenta.setText("Venta");
         btnVenta.addActionListener(this::btnVentaActionPerformed);
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Menu principal Admin");
 
         btnVerHistorial.setText("Historial de Ventas");
         btnVerHistorial.addActionListener(this::btnVerHistorialActionPerformed);
 
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Bienvenido!!");
+
         javax.swing.GroupLayout panelDashboardLayout = new javax.swing.GroupLayout(panelDashboard);
         panelDashboard.setLayout(panelDashboardLayout);
         panelDashboardLayout.setHorizontalGroup(
             panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDashboardLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMenuInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMenuClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+            .addGroup(panelDashboardLayout.createSequentialGroup()
                 .addGroup(panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(panelDashboardLayout.createSequentialGroup()
-                        .addComponent(btnMenuEmpleados)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVenta)
+                        .addGap(208, 208, 208)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDashboardLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelDashboardLayout.createSequentialGroup()
+                                .addComponent(btnMenuInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnMenuClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnMenuEmpleados)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnVenta)))
                         .addGap(18, 18, 18)
                         .addComponent(btnVerHistorial)))
-                .addGap(106, 106, 106))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         panelDashboardLayout.setVerticalGroup(
             panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDashboardLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(jLabel1)
-                .addGap(106, 106, 106)
+                .addGap(89, 89, 89)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMenuEmpleados)
                     .addComponent(btnMenuClientes)
                     .addComponent(btnMenuInventario)
-                    .addComponent(btnMenuEmpleados)
                     .addComponent(btnVenta)
                     .addComponent(btnVerHistorial))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -221,8 +235,7 @@ public class MenuAdminView extends javax.swing.JFrame {
                             .addGroup(panelClientesLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtBuscarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44)))))
+                                .addComponent(txtBuscarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         panelClientesLayout.setVerticalGroup(
@@ -233,8 +246,8 @@ public class MenuAdminView extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtBuscarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                .addGap(124, 124, 124)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarCliente)
                     .addComponent(btnModificarCliente)
@@ -519,6 +532,7 @@ public class MenuAdminView extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(tablaHistorial);
 
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel8.setText("HISTORIAL DE VENTAS");
 
         jButton1.setText("Generar Reporte");
@@ -529,29 +543,27 @@ public class MenuAdminView extends javax.swing.JFrame {
         panelHistorialVentasLayout.setHorizontalGroup(
             panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelHistorialVentasLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistorialVentasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistorialVentasLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(231, 231, 231))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistorialVentasLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(233, 233, 233))))
+                    .addGroup(panelHistorialVentasLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelHistorialVentasLayout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(jButton1)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         panelHistorialVentasLayout.setVerticalGroup(
             panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistorialVentasLayout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(44, 44, 44))
+                .addGap(32, 32, 32))
         );
 
         panelPrincipal.add(panelHistorialVentas, "card6");
@@ -812,6 +824,7 @@ public class MenuAdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
