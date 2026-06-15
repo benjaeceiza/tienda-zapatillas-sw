@@ -1,5 +1,6 @@
 package com.mycompany.tienda.zapatillas.view.menus;
 
+import com.mycompany.tienda.zapatillas.controller.ClienteController;
 import java.awt.event.ActionListener;
 import javax.swing.JTable;
 
@@ -615,11 +616,13 @@ public class MenuAdminView extends javax.swing.JFrame {
 
     private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
         com.mycompany.tienda.zapatillas.controller.ClienteController controlador = 
-        new com.mycompany.tienda.zapatillas.controller.ClienteController();
+    new com.mycompany.tienda.zapatillas.controller.ClienteController();
+
+    // 1. Abrimos el formulario (el programa se pausa aquí hasta que cierres el diálogo)
+    controlador.abrirFormularioModificar(this, this.tablaClientes);
     
-    // AQUÍ ESTÁ EL CAMBIO: pasamos 'this' Y 'this.tablaClientes'
-    // Asegúrate de que 'tablaClientes' sea el nombre de tu tabla en el diseño (o cámbialo por el nombre real)
-        controlador.abrirFormularioModificar(this, this.tablaClientes);
+    // 2. UNA VEZ CERRADO EL DIÁLOGO, refrescamos la tabla inmediatamente
+    controlador.llenarTabla(this.tablaClientes);
     }//GEN-LAST:event_btnModificarClienteActionPerformed
 
     private void btnModificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEmpleadoActionPerformed
@@ -679,8 +682,7 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuClientesActionPerformed
 
     private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
-        new com.mycompany.tienda.zapatillas.controller.ClienteController()
-        .abrirFormularioModificar(this, this.tablaClientes);
+        new ClienteController().abrirFormularioAgregar(this, tablaClientes);
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
     private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed

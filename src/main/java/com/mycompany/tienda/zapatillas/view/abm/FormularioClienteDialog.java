@@ -4,6 +4,7 @@
  */
 package com.mycompany.tienda.zapatillas.view.abm;
 
+import com.mycompany.tienda.zapatillas.controller.ClienteController;
 import java.awt.event.ActionListener;
 
 /**
@@ -128,9 +129,7 @@ public class FormularioClienteDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
-        com.mycompany.tienda.zapatillas.view.menus.MenuAdminView menu = (com.mycompany.tienda.zapatillas.view.menus.MenuAdminView) this.getParent();
-        controlador.procesarGuardado(this, menu);
+    new ClienteController().procesarGuardado(this);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**

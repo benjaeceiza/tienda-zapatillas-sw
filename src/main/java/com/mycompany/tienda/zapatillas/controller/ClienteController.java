@@ -66,22 +66,21 @@ public class ClienteController {
 }
 
     // Guarda los datos (Insert o Update)
-    public void procesarGuardado(com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog form, com.mycompany.tienda.zapatillas.view.menus.MenuAdminView menu) {
-        Cliente c = new Cliente();
-        c.setNombre(form.getNombre());
-        c.setApellido(form.getApellido());
-        c.setEmail(form.getCorreo());
-        c.setIdCliente(form.getIdClienteActual());
+   public void procesarGuardado(com.mycompany.tienda.zapatillas.view.abm.FormularioClienteDialog form) {
+    Cliente c = new Cliente();
+    c.setNombre(form.getNombre());
+    c.setApellido(form.getApellido());
+    c.setEmail(form.getCorreo());
+    c.setIdCliente(form.getIdClienteActual());
 
-        if (form.getIdClienteActual() == -1) {
-            clienteDAO.registrarCliente(c);
-        } else {
-            clienteDAO.modificarCliente(c);
-        }
-
-        form.dispose(); 
-        llenarTabla(menu.getTablaClientes()); // Refresca la tabla
+    if (form.getIdClienteActual() == -1) {
+        clienteDAO.registrarCliente(c);
+    } else {
+        clienteDAO.modificarCliente(c);
     }
+
+    form.dispose(); // Solo cierra el formulario
+}
 
     // Procesa la eliminación
     public void eliminarCliente(javax.swing.JFrame padre, javax.swing.JTable tabla) {

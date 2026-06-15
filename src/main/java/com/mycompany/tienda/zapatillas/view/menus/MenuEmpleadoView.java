@@ -416,8 +416,14 @@ public class MenuEmpleadoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
     private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
-        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
-        controlador.abrirFormularioModificar(this, this.tablaClientes);
+        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = 
+    new com.mycompany.tienda.zapatillas.controller.ClienteController();
+
+    // 1. Abrimos el formulario (el programa se pausa aquí hasta que cierres el diálogo)
+    controlador.abrirFormularioModificar(this, this.tablaClientes);
+    
+    // 2. UNA VEZ CERRADO EL DIÁLOGO, refrescamos la tabla inmediatamente
+    controlador.llenarTabla(this.tablaClientes);
     }//GEN-LAST:event_btnModificarClienteActionPerformed
 
     private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
