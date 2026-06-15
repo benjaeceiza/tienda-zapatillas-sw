@@ -5,9 +5,9 @@ import java.sql.*; // Importación obligatoria para usar JDBC
 public class ConexionDB {
     
     // Credenciales de MySQL 
-    private static final String URL = "jdbc:mysql://localhost:3306/tienda_zapatillas"; 
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/tienda_zapatillas"; 
     private static final String USER = "root"; 
-    private static final String PASSWORD = ""; 
+    private static final String PASSWORD = "Aguscap123"; 
 
     public static Connection conectar() {
         Connection con = null;
