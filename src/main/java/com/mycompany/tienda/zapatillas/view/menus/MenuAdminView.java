@@ -631,7 +631,43 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarEmpleadoActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+
+         try {
+        // 1. Obtener los productos desde el DAO
+        com.mycompany.tienda.zapatillas.dao.ProductoDAO dao = new com.mycompany.tienda.zapatillas.dao.ProductoDAO();
+        java.util.List<com.mycompany.tienda.zapatillas.model.Producto> productos = dao.listarProductos();
+
+        // 2. Abrir JFileChooser para elegir dónde guardar
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        fileChooser.setDialogTitle("Guardar Reporte de Inventario");
+        fileChooser.setSelectedFile(new java.io.File("ReporteInventario.pdf"));
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos PDF", "pdf"));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
+            java.io.File archivo = fileChooser.getSelectedFile();
+            String rutaArchivo = archivo.getAbsolutePath();
+
+            // 3. Generar el reporte
+            com.mycompany.tienda.zapatillas.reportes.ReporteInventarioPDF reporte = new com.mycompany.tienda.zapatillas.reportes.ReporteInventarioPDF();
+            reporte.generarReporteInventario(productos, rutaArchivo);
+
+            // 4. Feedback al usuario
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Reporte de Inventario generado correctamente en: " + rutaArchivo);
+
+            // 5. Abrir el PDF automáticamente
+            if (archivo.exists() && java.awt.Desktop.isDesktopSupported()) {
+                java.awt.Desktop.getDesktop().open(archivo);
+            }
+        }
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Error al generar el reporte: " + e.getMessage(), 
+            "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+        
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnAgregarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEmpleadoActionPerformed
@@ -756,7 +792,44 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+        try {
+        // 1. Obtener las filas desde el DAO
+        com.mycompany.tienda.zapatillas.dao.VentaDAO dao = new com.mycompany.tienda.zapatillas.dao.VentaDAO();
+        java.util.List<Object[]> filas = dao.listarVentas();
+
+        // 2. Abrir un JFileChooser para que el usuario elija dónde guardar
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        fileChooser.setDialogTitle("Guardar Reporte de Ventas");
+        
+        // Sugerir nombre por defecto
+        fileChooser.setSelectedFile(new java.io.File("ReporteVentas.pdf"));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
+            java.io.File archivo = fileChooser.getSelectedFile();
+            String rutaArchivo = archivo.getAbsolutePath();
+
+            // 3. Generar el reporte
+            com.mycompany.tienda.zapatillas.reportes.ReporteVentasPDF reporte = new com.mycompany.tienda.zapatillas.reportes.ReporteVentasPDF();
+            reporte.generarReporteDesdeFilas(filas, rutaArchivo);
+
+            // 4. Feedback al usuario
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Reporte generado correctamente en: " + rutaArchivo);
+
+            // 5. Abrir el PDF automáticamente
+            if (archivo.exists() && java.awt.Desktop.isDesktopSupported()) {
+                java.awt.Desktop.getDesktop().open(archivo);
+            }
+        }
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Error al generar el reporte: " + e.getMessage(), 
+            "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
