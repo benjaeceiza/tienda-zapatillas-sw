@@ -4,36 +4,34 @@ import java.awt.event.ActionListener;
 import com.mycompany.tienda.zapatillas.controller.ClienteController;
 import com.mycompany.tienda.zapatillas.controller.ProductoController;
 import com.mycompany.tienda.zapatillas.controller.VentaController;
+
 /**
  *
  * @author Usuario
  */
 public class MenuEmpleadoView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuEmpleadoView.class.getName());
 
     public MenuEmpleadoView() {
         initComponents();
-        
-        PanelPrincipalEmpleados.add(panelDashboardEmpleado, "dashboard");
-    
 
-    // Agregamos los paneles con los nombres correctos
+        PanelPrincipalEmpleados.add(panelDashboardEmpleado, "dashboard");
+
+        // Agregamos los paneles con los nombres correctos
         PanelPrincipalEmpleados.add(panelInventario, "inventario");
         PanelPrincipalEmpleados.add(panelClientes, "clientes");
         PanelPrincipalEmpleados.add(panelVentas, "venta");
-    
-    // Si quieres que al arrancar se vea el dashboard o inventario:
-      mostrarPanel("dashboard");
-    
+
+        // Si quieres que al arrancar se vea el dashboard o inventario:
+        mostrarPanel("dashboard");
+
     }
-    
+
     private void mostrarPanel(String nombrePanel) {
-    java.awt.CardLayout cl = (java.awt.CardLayout) (PanelPrincipalEmpleados.getLayout());
-    cl.show(PanelPrincipalEmpleados, nombrePanel);
-}
-    
-    
+        java.awt.CardLayout cl = (java.awt.CardLayout) (PanelPrincipalEmpleados.getLayout());
+        cl.show(PanelPrincipalEmpleados, nombrePanel);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -78,6 +76,8 @@ public class MenuEmpleadoView extends javax.swing.JFrame {
         BtnClientes = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         BtnNuevaVenta = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         BtnMenuInventario.setText("Inventario");
         BtnMenuInventario.addActionListener(this::BtnMenuInventarioActionPerformed);
@@ -383,6 +383,14 @@ public class MenuEmpleadoView extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Cuenta");
+
+        jMenuItem1.setText("Cerrar Sesion");
+        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -400,30 +408,30 @@ public class MenuEmpleadoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnMenuInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuInventarioActionPerformed
-       mostrarPanel("inventario");
-    new ProductoController().llenarTabla(this.tablaInventario);
+        mostrarPanel("inventario");
+        new ProductoController().llenarTabla(this.tablaInventario);
     }//GEN-LAST:event_BtnMenuInventarioActionPerformed
 
     private void BtnMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuClientesActionPerformed
         mostrarPanel("clientes");
-    new ClienteController().llenarTabla(this.tablaClientes);
+        new ClienteController().llenarTabla(this.tablaClientes);
     }//GEN-LAST:event_BtnMenuClientesActionPerformed
 
     private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
-       com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
+        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = new com.mycompany.tienda.zapatillas.controller.ClienteController();
         // Pasamos 'this' (ventana) y 'tablaClientes' (el componente JTable)
         controlador.abrirFormularioAgregar(this, this.tablaClientes);
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
     private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
-        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = 
-    new com.mycompany.tienda.zapatillas.controller.ClienteController();
+        com.mycompany.tienda.zapatillas.controller.ClienteController controlador
+                = new com.mycompany.tienda.zapatillas.controller.ClienteController();
 
-    // 1. Abrimos el formulario (el programa se pausa aquí hasta que cierres el diálogo)
-    controlador.abrirFormularioModificar(this, this.tablaClientes);
-    
-    // 2. refrescamos la tabla inmediatamente
-    controlador.llenarTabla(this.tablaClientes);
+        // 1. Abrimos el formulario (el programa se pausa aquí hasta que cierres el diálogo)
+        controlador.abrirFormularioModificar(this, this.tablaClientes);
+
+        // 2. refrescamos la tabla inmediatamente
+        controlador.llenarTabla(this.tablaClientes);
     }//GEN-LAST:event_btnModificarClienteActionPerformed
 
     private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
@@ -445,22 +453,22 @@ public class MenuEmpleadoView extends javax.swing.JFrame {
 
     private void btnAgregarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarritoActionPerformed
         new com.mycompany.tienda.zapatillas.controller.VentaController().agregarAlCarrito(
-        this, 
-        this.tablaCarrito, 
-        this.cmbClientes, 
-        this.cmbProductos, 
-        this.txtCantidad, 
-        this.lblTotal
-    );
+                this,
+                this.tablaCarrito,
+                this.cmbClientes,
+                this.cmbProductos,
+                this.txtCantidad,
+                this.lblTotal
+        );
     }//GEN-LAST:event_btnAgregarCarritoActionPerformed
 
     private void btnConfirmarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarVentaActionPerformed
-       new com.mycompany.tienda.zapatillas.controller.VentaController().confirmarVenta(
-        this, 
-        this.tablaCarrito, 
-        this.cmbClientes, 
-        this.lblTotal
-    );
+        new com.mycompany.tienda.zapatillas.controller.VentaController().confirmarVenta(
+                this,
+                this.tablaCarrito,
+                this.cmbClientes,
+                this.lblTotal
+        );
     }//GEN-LAST:event_btnConfirmarVentaActionPerformed
 
     private void BtnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInventarioActionPerformed
@@ -475,35 +483,48 @@ public class MenuEmpleadoView extends javax.swing.JFrame {
 
     private void BtnNuevaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevaVentaActionPerformed
         mostrarPanel("venta"); // Cambiado de "Venta" a "venta"
-    new com.mycompany.tienda.zapatillas.controller.VentaController().inicializarCaja(
-        this.tablaCarrito, this.lblTotal, this.txtCantidad, this.cmbClientes, this.cmbProductos
-    );
+        new com.mycompany.tienda.zapatillas.controller.VentaController().inicializarCaja(
+                this.tablaCarrito, this.lblTotal, this.txtCantidad, this.cmbClientes, this.cmbProductos
+        );
     }//GEN-LAST:event_BtnNuevaVentaActionPerformed
 
     private void BtnMenuVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuVentaActionPerformed
         mostrarPanel("venta");
         new com.mycompany.tienda.zapatillas.controller.VentaController().inicializarCaja(
-        this.tablaCarrito, 
-        this.lblTotal, 
-        this.txtCantidad, 
-        this.cmbClientes, 
-        this.cmbProductos
-    );
+                this.tablaCarrito,
+                this.lblTotal,
+                this.txtCantidad,
+                this.cmbClientes,
+                this.cmbProductos
+        );
     }//GEN-LAST:event_BtnMenuVentaActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
-     if (txtBuscar.getText().isEmpty()) {
-        new com.mycompany.tienda.zapatillas.controller.ProductoController().llenarTabla(tablaInventario);
-    } else {
-        // Si hay texto, filtramos
-        new com.mycompany.tienda.zapatillas.controller.ProductoController().filtrarTabla(tablaInventario, txtBuscar.getText());
-    }
+        if (txtBuscar.getText().isEmpty()) {
+            new com.mycompany.tienda.zapatillas.controller.ProductoController().llenarTabla(tablaInventario);
+        } else {
+            // Si hay texto, filtramos
+            new com.mycompany.tienda.zapatillas.controller.ProductoController().filtrarTabla(tablaInventario, txtBuscar.getText());
+        }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtBuscarClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClientesKeyReleased
         String filtro = txtBuscarClientes.getText();
-    new com.mycompany.tienda.zapatillas.controller.ClienteController().filtrarTabla(tablaClientes, filtro);
+        new com.mycompany.tienda.zapatillas.controller.ClienteController().filtrarTabla(tablaClientes, filtro);
     }//GEN-LAST:event_txtBuscarClientesKeyReleased
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        com.mycompany.tienda.zapatillas.model.SesionGlobal.idUsuarioActual = -1;
+        com.mycompany.tienda.zapatillas.model.SesionGlobal.nombreUsuarioActual = "";
+
+        // 2. Cerramos esta ventana del Menú Principal
+        this.dispose();
+
+        // 3. Volvemos a instanciar y mostrar la pantalla de Login
+        com.mycompany.tienda.zapatillas.view.login.LoginView login = new com.mycompany.tienda.zapatillas.view.login.LoginView();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null); // Para que aparezca bien centrada en la pantalla
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -554,7 +575,9 @@ public class MenuEmpleadoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -572,4 +595,3 @@ public class MenuEmpleadoView extends javax.swing.JFrame {
     private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 }
-

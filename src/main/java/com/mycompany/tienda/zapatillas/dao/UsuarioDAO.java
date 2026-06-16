@@ -12,8 +12,8 @@ public class UsuarioDAO {
 
     public Usuario iniciarSesion(String email, String password) {
         Usuario usr = null;
-        // Usamos los signos de interrogación (?) para inyectar los datos de forma segura
-        String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
+        // Solo deja iniciar sesión si el usuario está activo (estado = 1)
+        String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ? AND estado = 1";
 
         try {
             Connection con = ConexionDB.conectar();
@@ -22,8 +22,6 @@ public class UsuarioDAO {
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
-
-            // Si el usuario existe, armamos el objeto con todos sus datos
             if (rs.next()) {
                 usr = new Usuario();
                 usr.setIdUsuario(rs.getInt("id_usuario"));
@@ -36,13 +34,12 @@ public class UsuarioDAO {
         } catch (Exception e) {
             System.out.println("Error al iniciar sesión: " + e.getMessage());
         }
-
-        return usr; // Devuelve el objeto lleno, o null si le pifió a la clave
+        return usr; 
     }
 
-    public java.util.List<Usuario> listarUsuarios() {
-        java.util.List<Usuario> lista = new java.util.ArrayList<>();
-        String sql = "SELECT * FROM usuarios";
+    public List<Usuario> listarUsuarios() {
+        List<Usuario> lista = new ArrayList<>();
+        String sql = "SELECT * FROM usuarios WHERE estado = 1";
         try {
             Connection con = ConexionDB.conectar();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -74,13 +71,10 @@ public class UsuarioDAO {
             ps.execute();
             con.close();
             return true;
-        } catch (Exception e) {
-            return false;
-        }
+        } catch (Exception e) { return false; }
     }
 
     public boolean modificarUsuario(Usuario u) {
-        // Si escribió una contraseña nueva, la actualizamos. Si no, solo actualizamos datos
         boolean cambiaPass = !u.getPassword().isEmpty();
         String sql = cambiaPass
                 ? "UPDATE usuarios SET nombre=?, email=?, password=?, rol=? WHERE id_usuario=?"
@@ -101,13 +95,12 @@ public class UsuarioDAO {
             ps.execute();
             con.close();
             return true;
-        } catch (Exception e) {
-            return false;
-        }
+        } catch (Exception e) { return false; }
     }
 
+    // SOFT DELETE: Cambia el estado a 0
     public boolean eliminarUsuario(int idUsuario) {
-        String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+        String sql = "UPDATE usuarios SET estado = 0 WHERE id_usuario = ?";
         try {
             Connection con = ConexionDB.conectar();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -116,38 +109,29 @@ public class UsuarioDAO {
             con.close();
             return true;
         } catch (Exception e) {
+            System.out.println("Error al hacer soft delete del usuario: " + e.getMessage());
             return false;
         }
     }
     
     public List<Usuario> filtrarUsuarios(String busqueda) {
-    List<Usuario> lista = new ArrayList<>();
-    String sql = "SELECT * FROM usuarios WHERE nombre LIKE ? OR email LIKE ?";
-    try (Connection con = ConexionDB.conectar(); 
-         PreparedStatement ps = con.prepareStatement(sql)) {
-        
-        ps.setString(1, "%" + busqueda + "%"); 
-        ps.setString(2, "%" + busqueda + "%");
-        ResultSet rs = ps.executeQuery();
-        
-        while (rs.next()) {
-            // 1. Crear la instancia del objeto
-            Usuario usr = new Usuario();
-            
-            // 2. Mapear los datos desde el ResultSet al objeto
-            usr.setIdUsuario(rs.getInt("id_usuario"));
-            usr.setNombre(rs.getString("nombre"));
-            usr.setEmail(rs.getString("email"));
-            usr.setPassword(rs.getString("password"));
-            usr.setRol(rs.getString("rol"));
-            
-            // 3. AGREGAR EL OBJETO (la variable 'prod', no la clase 'Producto')
-            lista.add(usr); 
-        }
-    } catch (Exception e) { 
-        e.printStackTrace(); 
+        List<Usuario> lista = new ArrayList<>();
+        String sql = "SELECT * FROM usuarios WHERE estado = 1 AND (nombre LIKE ? OR email LIKE ?)";
+        try (Connection con = ConexionDB.conectar(); 
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "%" + busqueda + "%"); 
+            ps.setString(2, "%" + busqueda + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Usuario usr = new Usuario();
+                usr.setIdUsuario(rs.getInt("id_usuario"));
+                usr.setNombre(rs.getString("nombre"));
+                usr.setEmail(rs.getString("email"));
+                usr.setPassword(rs.getString("password"));
+                usr.setRol(rs.getString("rol"));
+                lista.add(usr); 
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        return lista;
     }
-    return lista;
-}
-    
 }

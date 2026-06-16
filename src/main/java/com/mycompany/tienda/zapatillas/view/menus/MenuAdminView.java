@@ -102,6 +102,8 @@ public class MenuAdminView extends javax.swing.JFrame {
         tablaHistorial = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        cmbFiltroMes = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -110,6 +112,8 @@ public class MenuAdminView extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         panelDashboard.setPreferredSize(new java.awt.Dimension(583, 355));
 
@@ -539,6 +543,12 @@ public class MenuAdminView extends javax.swing.JFrame {
         jButton1.setText("Generar Reporte");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
+        cmbFiltroMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos los meses", "01 - Enero", "02 - Febrero", "03 - Marzo", "04 - Abril", "05 - Mayo", "06 - Junio", "07 - Julio", "08 - Agosto", "09 - Septiembre", "10 - Octubre", "11 - Noviembre", "12 - Diciembre" }));
+        cmbFiltroMes.addActionListener(this::cmbFiltroMesActionPerformed);
+        cmbFiltroMes.addPropertyChangeListener(this::cmbFiltroMesPropertyChange);
+
+        jLabel10.setText("Mes:");
+
         javax.swing.GroupLayout panelHistorialVentasLayout = new javax.swing.GroupLayout(panelHistorialVentas);
         panelHistorialVentas.setLayout(panelHistorialVentasLayout);
         panelHistorialVentasLayout.setHorizontalGroup(
@@ -547,24 +557,33 @@ public class MenuAdminView extends javax.swing.JFrame {
                 .addGroup(panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelHistorialVentasLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelHistorialVentasLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbFiltroMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44))))
                     .addGroup(panelHistorialVentasLayout.createSequentialGroup()
-                        .addGap(225, 225, 225)
+                        .addGap(227, 227, 227)
                         .addComponent(jButton1)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         panelHistorialVentasLayout.setVerticalGroup(
             panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistorialVentasLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jLabel8)
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(panelHistorialVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(cmbFiltroMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(32, 32, 32))
+                .addGap(44, 44, 44))
         );
 
         panelPrincipal.add(panelHistorialVentas, "card6");
@@ -599,6 +618,14 @@ public class MenuAdminView extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Cuenta");
+
+        jMenuItem6.setText("Cerrar Sesion");
+        jMenuItem6.addActionListener(this::jMenuItem6ActionPerformed);
+        jMenu3.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         setBounds(0, 0, 599, 367);
@@ -615,14 +642,14 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuInventarioActionPerformed
 
     private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
-        com.mycompany.tienda.zapatillas.controller.ClienteController controlador = 
-    new com.mycompany.tienda.zapatillas.controller.ClienteController();
+        com.mycompany.tienda.zapatillas.controller.ClienteController controlador
+                = new com.mycompany.tienda.zapatillas.controller.ClienteController();
 
-    // 1. Abrimos el formulario (el programa se pausa aquí hasta que cierres el diálogo)
-    controlador.abrirFormularioModificar(this, this.tablaClientes);
-    
-    // 2. UNA VEZ CERRADO EL DIÁLOGO, refrescamos la tabla inmediatamente
-    controlador.llenarTabla(this.tablaClientes);
+        // 1. Abrimos el formulario (el programa se pausa aquí hasta que cierres el diálogo)
+        controlador.abrirFormularioModificar(this, this.tablaClientes);
+
+        // 2. UNA VEZ CERRADO EL DIÁLOGO, refrescamos la tabla inmediatamente
+        controlador.llenarTabla(this.tablaClientes);
     }//GEN-LAST:event_btnModificarClienteActionPerformed
 
     private void btnModificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEmpleadoActionPerformed
@@ -632,42 +659,42 @@ public class MenuAdminView extends javax.swing.JFrame {
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
 
-         try {
-        // 1. Obtener los productos desde el DAO
-        com.mycompany.tienda.zapatillas.dao.ProductoDAO dao = new com.mycompany.tienda.zapatillas.dao.ProductoDAO();
-        java.util.List<com.mycompany.tienda.zapatillas.model.Producto> productos = dao.listarProductos();
+        try {
+            // 1. Obtener los productos desde el DAO
+            com.mycompany.tienda.zapatillas.dao.ProductoDAO dao = new com.mycompany.tienda.zapatillas.dao.ProductoDAO();
+            java.util.List<com.mycompany.tienda.zapatillas.model.Producto> productos = dao.listarProductos();
 
-        // 2. Abrir JFileChooser para elegir dónde guardar
-        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
-        fileChooser.setDialogTitle("Guardar Reporte de Inventario");
-        fileChooser.setSelectedFile(new java.io.File("ReporteInventario.pdf"));
-        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos PDF", "pdf"));
+            // 2. Abrir JFileChooser para elegir dónde guardar
+            javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+            fileChooser.setDialogTitle("Guardar Reporte de Inventario");
+            fileChooser.setSelectedFile(new java.io.File("ReporteInventario.pdf"));
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos PDF", "pdf"));
 
-        int userSelection = fileChooser.showSaveDialog(this);
+            int userSelection = fileChooser.showSaveDialog(this);
 
-        if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
-            java.io.File archivo = fileChooser.getSelectedFile();
-            String rutaArchivo = archivo.getAbsolutePath();
+            if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
+                java.io.File archivo = fileChooser.getSelectedFile();
+                String rutaArchivo = archivo.getAbsolutePath();
 
-            // 3. Generar el reporte
-            com.mycompany.tienda.zapatillas.reportes.ReporteInventarioPDF reporte = new com.mycompany.tienda.zapatillas.reportes.ReporteInventarioPDF();
-            reporte.generarReporteInventario(productos, rutaArchivo);
+                // 3. Generar el reporte
+                com.mycompany.tienda.zapatillas.reportes.ReporteInventarioPDF reporte = new com.mycompany.tienda.zapatillas.reportes.ReporteInventarioPDF();
+                reporte.generarReporteInventario(productos, rutaArchivo);
 
-            // 4. Feedback al usuario
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Reporte de Inventario generado correctamente en: " + rutaArchivo);
+                // 4. Feedback al usuario
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Reporte de Inventario generado correctamente en: " + rutaArchivo);
 
-            // 5. Abrir el PDF automáticamente
-            if (archivo.exists() && java.awt.Desktop.isDesktopSupported()) {
-                java.awt.Desktop.getDesktop().open(archivo);
+                // 5. Abrir el PDF automáticamente
+                if (archivo.exists() && java.awt.Desktop.isDesktopSupported()) {
+                    java.awt.Desktop.getDesktop().open(archivo);
+                }
             }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Error al generar el reporte: " + e.getMessage(),
+                    "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Error al generar el reporte: " + e.getMessage(), 
-            "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
-        
+
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnAgregarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEmpleadoActionPerformed
@@ -722,8 +749,8 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
     private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
-       new com.mycompany.tienda.zapatillas.controller.ClienteController()
-        .eliminarCliente(this, this.tablaClientes);
+        new com.mycompany.tienda.zapatillas.controller.ClienteController()
+                .eliminarCliente(this, this.tablaClientes);
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
     private void cmbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductosActionPerformed
@@ -743,7 +770,7 @@ public class MenuAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbClientesActionPerformed
 
     private void btnConfirmarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarVentaActionPerformed
-       new com.mycompany.tienda.zapatillas.controller.VentaController().confirmarVenta(this, this.tablaCarrito, this.cmbClientes, this.lblTotal);
+        new com.mycompany.tienda.zapatillas.controller.VentaController().confirmarVenta(this, this.tablaCarrito, this.cmbClientes, this.lblTotal);
     }//GEN-LAST:event_btnConfirmarVentaActionPerformed
 
     private void btnVerHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerHistorialActionPerformed
@@ -781,55 +808,69 @@ public class MenuAdminView extends javax.swing.JFrame {
         // Muestra la pantalla de la caja
         this.mostrarPanel("cardNuevaVenta");
         // Carga los combos de productos y clientes fresquitos
-       new com.mycompany.tienda.zapatillas.controller.VentaController().inicializarCaja(this.tablaCarrito, this.lblTotal, this.txtCantidad, this.cmbClientes, this.cmbProductos);
+        new com.mycompany.tienda.zapatillas.controller.VentaController().inicializarCaja(this.tablaCarrito, this.lblTotal, this.txtCantidad, this.cmbClientes, this.cmbProductos);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // Muestra la pantalla del historial
         this.mostrarPanel("cardHistorial");
         // Carga la tabla con todas las ventas que se hicieron
-       new com.mycompany.tienda.zapatillas.controller.VentaController().llenarTablaHistorial(this.tablaHistorial);
+        new com.mycompany.tienda.zapatillas.controller.VentaController().llenarTablaHistorial(this.tablaHistorial);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        try {
-        // 1. Obtener las filas desde el DAO
-        com.mycompany.tienda.zapatillas.dao.VentaDAO dao = new com.mycompany.tienda.zapatillas.dao.VentaDAO();
-        java.util.List<Object[]> filas = dao.listarVentas();
-
-        // 2. Abrir un JFileChooser para que el usuario elija dónde guardar
-        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
-        fileChooser.setDialogTitle("Guardar Reporte de Ventas");
-        
-        // Sugerir nombre por defecto
-        fileChooser.setSelectedFile(new java.io.File("ReporteVentas.pdf"));
-
-        int userSelection = fileChooser.showSaveDialog(this);
-
-        if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
-            java.io.File archivo = fileChooser.getSelectedFile();
-            String rutaArchivo = archivo.getAbsolutePath();
-
-            // 3. Generar el reporte
-            com.mycompany.tienda.zapatillas.reportes.ReporteVentasPDF reporte = new com.mycompany.tienda.zapatillas.reportes.ReporteVentasPDF();
-            reporte.generarReporteDesdeFilas(filas, rutaArchivo);
-
-            // 4. Feedback al usuario
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Reporte generado correctamente en: " + rutaArchivo);
-
-            // 5. Abrir el PDF automáticamente
-            if (archivo.exists() && java.awt.Desktop.isDesktopSupported()) {
-                java.awt.Desktop.getDesktop().open(archivo);
+      try {
+            // MAGIA: En vez de ir al DAO, leemos las filas VISIBLES de la tabla
+            java.util.List<Object[]> filasFiltradas = new java.util.ArrayList<>();
+            
+            // Recorremos solo lo que el filtro dejó en pantalla
+            for (int i = 0; i < tablaHistorial.getRowCount(); i++) {
+                Object[] fila = new Object[5];
+                fila[0] = tablaHistorial.getValueAt(i, 0); // Ticket
+                fila[1] = tablaHistorial.getValueAt(i, 1); // Fecha
+                fila[2] = tablaHistorial.getValueAt(i, 2); // Cliente
+                fila[3] = tablaHistorial.getValueAt(i, 3); // Vendedor
+                fila[4] = tablaHistorial.getValueAt(i, 4); // Total
+                filasFiltradas.add(fila);
             }
+
+            // 2. Abrir un JFileChooser para que el usuario elija dónde guardar
+            javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+            
+            // Le ponemos un nombre dinámico dependiendo del mes elegido
+            String mesElegido = cmbFiltroMes != null && cmbFiltroMes.getSelectedItem() != null 
+                    ? cmbFiltroMes.getSelectedItem().toString() : "Ventas";
+            fileChooser.setDialogTitle("Guardar Reporte de Ventas");
+            fileChooser.setSelectedFile(new java.io.File("Reporte_" + mesElegido + ".pdf"));
+
+            int userSelection = fileChooser.showSaveDialog(this);
+
+            if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
+                java.io.File archivo = fileChooser.getSelectedFile();
+                String rutaArchivo = archivo.getAbsolutePath();
+
+                // Validamos que termine en .pdf por las dudas
+                if (!rutaArchivo.toLowerCase().endsWith(".pdf")) {
+                    rutaArchivo += ".pdf";
+                }
+
+                // 3. Generar el reporte pasándole nuestra nueva lista filtrada
+                com.mycompany.tienda.zapatillas.reportes.ReporteVentasPDF reporte = new com.mycompany.tienda.zapatillas.reportes.ReporteVentasPDF();
+                reporte.generarReporteDesdeFilas(filasFiltradas, rutaArchivo);
+
+                // 4. Feedback y abrir archivo
+                javax.swing.JOptionPane.showMessageDialog(this, "Reporte generado correctamente en:\n" + rutaArchivo);
+                if (archivo.exists() && java.awt.Desktop.isDesktopSupported()) {
+                    java.awt.Desktop.getDesktop().open(archivo);
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Error al generar el reporte: " + e.getMessage(),
+                    "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Error al generar el reporte: " + e.getMessage(), 
-            "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -847,9 +888,44 @@ public class MenuAdminView extends javax.swing.JFrame {
 
     private void txtBuscarUsuariosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarUsuariosKeyReleased
         String filtro = txtBuscarUsuarios.getText();
-    // Llamamos al controlador de usuarios específicamente
-    new com.mycompany.tienda.zapatillas.controller.UsuarioController().filtrarTabla(tablaEmpleados, filtro);
+        // Llamamos al controlador de usuarios específicamente
+        new com.mycompany.tienda.zapatillas.controller.UsuarioController().filtrarTabla(tablaEmpleados, filtro);
     }//GEN-LAST:event_txtBuscarUsuariosKeyReleased
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        com.mycompany.tienda.zapatillas.model.SesionGlobal.idUsuarioActual = -1;
+        com.mycompany.tienda.zapatillas.model.SesionGlobal.nombreUsuarioActual = "";
+
+        // 2. Cerramos esta ventana del Menú Principal
+        this.dispose();
+
+        // 3. Volvemos a instanciar y mostrar la pantalla de Login
+        com.mycompany.tienda.zapatillas.view.login.LoginView login = new com.mycompany.tienda.zapatillas.view.login.LoginView();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null); // Para que aparezca bien centrada en la pantalla
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void cmbFiltroMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cmbFiltroMesPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbFiltroMesPropertyChange
+
+    private void cmbFiltroMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroMesActionPerformed
+       String seleccion = cmbFiltroMes.getSelectedItem().toString();
+        
+        // Activamos el motor de filtrado de Java Swing
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaHistorial.getModel();
+        javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> trs = new javax.swing.table.TableRowSorter<>(modelo);
+        tablaHistorial.setRowSorter(trs);
+
+        if (seleccion.equals("Todos los meses")) {
+            trs.setRowFilter(null); // Quita el filtro, muestra todo
+        } else {
+            // Cortamos el texto para quedarnos solo con el número (ej: "02" de "02 - Febrero")
+            String mes = seleccion.substring(0, 2); 
+            // Filtramos en la Columna 1 (Fecha) buscando el guion del mes (ej: "-02-")
+            trs.setRowFilter(javax.swing.RowFilter.regexFilter("-" + mes + "-", 1));
+        }
+    }//GEN-LAST:event_cmbFiltroMesActionPerformed
 
     // =========================================================================
     // MÉTODO MAIN (Punto de arranque de la ventana)
@@ -889,9 +965,11 @@ public class MenuAdminView extends javax.swing.JFrame {
     private javax.swing.JButton btnVenta;
     private javax.swing.JButton btnVerHistorial;
     private javax.swing.JComboBox<String> cmbClientes;
+    private javax.swing.JComboBox<String> cmbFiltroMes;
     private javax.swing.JComboBox<String> cmbProductos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -902,12 +980,14 @@ public class MenuAdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -12,7 +12,8 @@ public class ClienteDAO {
 
     public List<Cliente> listarClientes() {
         List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT * FROM clientes";
+        // SOLO TRAE LOS ACTIVOS
+        String sql = "SELECT * FROM clientes WHERE estado = 1"; 
         
         try {
             Connection con = ConexionDB.conectar();
@@ -51,7 +52,6 @@ public class ClienteDAO {
         }
     }
     
-    // Método para MODIFICAR
     public boolean modificarCliente(Cliente c) {
         String sql = "UPDATE clientes SET nombre = ?, apellido = ?, email = ? WHERE id_cliente = ?";
         try {
@@ -70,9 +70,9 @@ public class ClienteDAO {
         }
     }
 
-    // Método para ELIMINAR
+    // SOFT DELETE: Cambia el estado a 0 en vez de borrar
     public boolean eliminarCliente(int idCliente) {
-        String sql = "DELETE FROM clientes WHERE id_cliente = ?";
+        String sql = "UPDATE clientes SET estado = 0 WHERE id_cliente = ?";
         try {
             Connection con = ConexionDB.conectar();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -81,31 +81,31 @@ public class ClienteDAO {
             con.close();
             return true;
         } catch (Exception e) {
-            System.out.println("Error al eliminar cliente: " + e.getMessage());
+            System.out.println("Error al hacer soft delete del cliente: " + e.getMessage());
             return false;
         }
     }
     
     public List<Cliente> filtrarClientes(String busqueda) {
-    List<Cliente> lista = new ArrayList<>();
-    String sql = "SELECT * FROM clientes WHERE nombre LIKE ? OR apellido LIKE ?";
-    try (Connection con = ConexionDB.conectar(); 
-         PreparedStatement ps = con.prepareStatement(sql)) {
-        
-        ps.setString(1, "%" + busqueda + "%");
-        ps.setString(2, "%" + busqueda + "%");
-        ResultSet rs = ps.executeQuery();
-        
-        while (rs.next()) {
-            Cliente cli = new Cliente();
-            cli.setIdCliente(rs.getInt("id_cliente"));
-            cli.setNombre(rs.getString("nombre"));
-            cli.setApellido(rs.getString("apellido"));
-            cli.setEmail(rs.getString("email"));
-            lista.add(cli);
-        }
-    } catch (Exception e) { e.printStackTrace(); }
-    return lista;
-}
-    
+        List<Cliente> lista = new ArrayList<>();
+        // FILTRA Y VERIFICA QUE ESTÉN ACTIVOS
+        String sql = "SELECT * FROM clientes WHERE estado = 1 AND (nombre LIKE ? OR apellido LIKE ?)";
+        try (Connection con = ConexionDB.conectar(); 
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, "%" + busqueda + "%");
+            ps.setString(2, "%" + busqueda + "%");
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Cliente cli = new Cliente();
+                cli.setIdCliente(rs.getInt("id_cliente"));
+                cli.setNombre(rs.getString("nombre"));
+                cli.setApellido(rs.getString("apellido"));
+                cli.setEmail(rs.getString("email"));
+                lista.add(cli);
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        return lista;
+    }
 }

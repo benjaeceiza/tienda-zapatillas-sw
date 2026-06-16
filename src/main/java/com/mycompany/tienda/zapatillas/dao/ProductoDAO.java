@@ -11,14 +11,13 @@ import java.util.List;
 
 public class ProductoDAO {
 
-    // Trae una lista con los productos desde la DB
     public List<Producto> listarProductos() {
         List<Producto> lista = new ArrayList<>();
-        
         try {
             Connection con = ConexionDB.conectar();
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM productos");
+            // SOLO TRAE LOS ACTIVOS
+            ResultSet rs = st.executeQuery("SELECT * FROM productos WHERE estado = 1");
 
             while (rs.next()) {
                 Producto prod = new Producto();
@@ -27,24 +26,20 @@ public class ProductoDAO {
                 prod.setModelo(rs.getString("modelo"));
                 prod.setPrecio(rs.getDouble("precio"));
                 prod.setStock(rs.getInt("stock"));
-                // prod.setRutaImagen(rs.getString("ruta_imagen")); // Lo dejamos comentado por ahora si no lo usás en la tabla
-                
-                lista.add(prod); // Guardamos la zapatilla en la lista
+                lista.add(prod);
             }
             con.close();
         } catch (Exception e) {
             System.out.println("Error en el DAO al listar: " + e.getMessage());
         }
-        
         return lista;
     }
     
-    // Método para INSERTAR
     public boolean registrarProducto(Producto prod) {
         String sql = "INSERT INTO productos (marca, modelo, precio, stock) VALUES (?, ?, ?, ?)";
         try {
-            java.sql.Connection con = com.mycompany.tienda.zapatillas.conexion.ConexionDB.conectar();
-            java.sql.PreparedStatement ps = con.prepareStatement(sql);
+            Connection con = ConexionDB.conectar();
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, prod.getMarca()); 
             ps.setString(2, prod.getModelo());
             ps.setDouble(3, prod.getPrecio());
@@ -53,18 +48,15 @@ public class ProductoDAO {
             con.close();
             return true;
         } catch (Exception e) {
-            System.out.println("Error al insertar producto: " + e.getMessage());
             return false;
         }
     }
 
-    // Método para ACTUALIZAR
    public boolean modificarProducto(Producto prod) {
-        // Acá agregamos "marca = ?," para que coincidan los 5 parámetros
         String sql = "UPDATE productos SET marca = ?, modelo = ?, precio = ?, stock = ? WHERE id_producto = ?";
         try {
-            java.sql.Connection con = com.mycompany.tienda.zapatillas.conexion.ConexionDB.conectar();
-            java.sql.PreparedStatement ps = con.prepareStatement(sql);
+            Connection con = ConexionDB.conectar();
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, prod.getMarca()); 
             ps.setString(2, prod.getModelo());
             ps.setDouble(3, prod.getPrecio());
@@ -74,36 +66,35 @@ public class ProductoDAO {
             con.close();
             return true;
         } catch (Exception e) {
-            System.out.println("Error al modificar producto: " + e.getMessage());
             return false;
         }
     }
    
-   // Método para ELIMINAR
+   // SOFT DELETE: Cambia el estado a 0
     public boolean eliminarProducto(int idProducto) {
-        String sql = "DELETE FROM productos WHERE id_producto = ?";
+        String sql = "UPDATE productos SET estado = 0 WHERE id_producto = ?";
         try {
-            java.sql.Connection con = com.mycompany.tienda.zapatillas.conexion.ConexionDB.conectar();
-            java.sql.PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idProducto); // Le pasamos el ID a borrar
+            Connection con = ConexionDB.conectar();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idProducto);
             ps.execute();
             con.close();
             return true;
         } catch (Exception e) {
-            System.out.println("Error al eliminar producto: " + e.getMessage());
+            System.out.println("Error al hacer soft delete del producto: " + e.getMessage());
             return false;
         }
     }
     
-    // Busca un producto específico por su ID
     public Producto buscarPorId(int id) {
         Producto p = null;
+        // Acá lo buscamos igual aunque esté "borrado", porque el historial lo necesita leer
         String sql = "SELECT * FROM productos WHERE id_producto = ?";
         try {
-            java.sql.Connection con = com.mycompany.tienda.zapatillas.conexion.ConexionDB.conectar();
-            java.sql.PreparedStatement ps = con.prepareStatement(sql);
+            Connection con = ConexionDB.conectar();
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            java.sql.ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 p = new Producto();
                 p.setIdProducto(rs.getInt("id_producto"));
@@ -113,56 +104,41 @@ public class ProductoDAO {
                 p.setStock(rs.getInt("stock"));
             }
             con.close();
-        } catch (Exception e) {
-            System.out.println("Error al buscar producto: " + e.getMessage());
-        }
+        } catch (Exception e) {}
         return p;
     }
     
     public boolean restarStock(int cantidad, int idProducto) {
         String sql = "UPDATE productos SET stock = stock - ? WHERE id_producto = ?";
         try {
-            java.sql.Connection con = com.mycompany.tienda.zapatillas.conexion.ConexionDB.conectar();
-            java.sql.PreparedStatement ps = con.prepareStatement(sql);
+            Connection con = ConexionDB.conectar();
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, cantidad);
             ps.setInt(2, idProducto);
             ps.execute();
             con.close();
             return true;
-        } catch (Exception e) {
-            System.out.println("Error al actualizar stock: " + e.getMessage());
-            return false;
-        }
+        } catch (Exception e) { return false; }
     }
     
     public List<Producto> filtrarProductos(String busqueda) {
-    List<Producto> lista = new ArrayList<>();
-    String sql = "SELECT * FROM productos WHERE marca LIKE ? OR modelo LIKE ?";
-    try (Connection con = ConexionDB.conectar(); 
-         PreparedStatement ps = con.prepareStatement(sql)) {
-        
-        ps.setString(1, "%" + busqueda + "%"); 
-        ps.setString(2, "%" + busqueda + "%");
-        ResultSet rs = ps.executeQuery();
-        
-        while (rs.next()) {
-            // 1. Crear la instancia del objeto
-            Producto prod = new Producto();
-            
-            // 2. Mapear los datos desde el ResultSet al objeto
-            prod.setIdProducto(rs.getInt("id_producto"));
-            prod.setMarca(rs.getString("marca"));
-            prod.setModelo(rs.getString("modelo"));
-            prod.setPrecio(rs.getDouble("precio"));
-            prod.setStock(rs.getInt("stock"));
-            
-            // 3. AGREGAR EL OBJETO (la variable 'prod', no la clase 'Producto')
-            lista.add(prod); 
-        }
-    } catch (Exception e) { 
-        e.printStackTrace(); 
+        List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM productos WHERE estado = 1 AND (marca LIKE ? OR modelo LIKE ?)";
+        try (Connection con = ConexionDB.conectar(); 
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "%" + busqueda + "%"); 
+            ps.setString(2, "%" + busqueda + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto prod = new Producto();
+                prod.setIdProducto(rs.getInt("id_producto"));
+                prod.setMarca(rs.getString("marca"));
+                prod.setModelo(rs.getString("modelo"));
+                prod.setPrecio(rs.getDouble("precio"));
+                prod.setStock(rs.getInt("stock"));
+                lista.add(prod); 
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        return lista;
     }
-    return lista;
-}
-    
 }

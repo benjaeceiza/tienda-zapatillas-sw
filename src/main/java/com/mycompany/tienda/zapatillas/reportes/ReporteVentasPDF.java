@@ -9,8 +9,16 @@ import java.util.List;
 public class ReporteVentasPDF {
 
     public void generarReporteDesdeFilas(List<Object[]> filas, String rutaArchivo) {
-        try (com.lowagie.text.Document documento = new com.lowagie.text.Document()) {
-            PdfWriter.getInstance(documento, new FileOutputStream(rutaArchivo));
+        
+        // 1. Lo sacamos del paréntesis del try. Instanciamos normal.
+        Document documento = new Document();
+        
+        try {
+            // 2. Creamos el archivo físico explicitly
+            FileOutputStream ficheroPdf = new FileOutputStream(rutaArchivo);
+            PdfWriter.getInstance(documento, ficheroPdf);
+            
+            // Abrimos el documento para empezar a inyectar contenido
             documento.open();
 
             // Título
@@ -23,6 +31,7 @@ public class ReporteVentasPDF {
             // Tabla: Ticket ID, Fecha, Cliente, Vendedor, Total
             PdfPTable tabla = new PdfPTable(new float[]{1.2f, 2f, 3f, 2.5f, 1.5f});
             tabla.setWidthPercentage(100);
+            
             String[] headers = {"Ticket", "Fecha", "Cliente", "Vendedor", "Total"};
             for (String h : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(h, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11)));
@@ -32,31 +41,53 @@ public class ReporteVentasPDF {
             }
 
             double totalGeneral = 0.0;
-            for (Object[] fila : filas) {
-                tabla.addCell(String.valueOf(fila[0]));
-                tabla.addCell(String.valueOf(fila[1]));
-                tabla.addCell(String.valueOf(fila[2]));
-                tabla.addCell(String.valueOf(fila[3]));
-                double total = 0.0;
-                try {
-                    total = Double.parseDouble(String.valueOf(fila[4]));
-                } catch (Exception ex) {
-                    // ignore parse errors
+            
+            // 3. Blindaje anti-roturas: Revisamos que la lista no esté vacía
+            if (filas != null && !filas.isEmpty()) {
+                for (Object[] fila : filas) {
+                    // Evitamos que un "null" puro rompa la generación del PDF
+                    tabla.addCell(fila[0] != null ? String.valueOf(fila[0]) : "-");
+                    tabla.addCell(fila[1] != null ? String.valueOf(fila[1]) : "-");
+                    tabla.addCell(fila[2] != null ? String.valueOf(fila[2]) : "-");
+                    tabla.addCell(fila[3] != null ? String.valueOf(fila[3]) : "-");
+                    
+                    double total = 0.0;
+                    try {
+                        if (fila[4] != null) {
+                            total = Double.parseDouble(String.valueOf(fila[4]));
+                        }
+                    } catch (Exception ex) {
+                        // Ignorar errores de conversión
+                    }
+                    tabla.addCell(String.format("$ %.2f", total));
+                    totalGeneral += total;
                 }
-                tabla.addCell(String.format("$ %.2f", total));
-                totalGeneral += total;
+            } else {
+                // Si justo no hay ventas en ese filtro, mostramos un mensaje prolijo
+                PdfPCell celdaVacia = new PdfPCell(new Phrase("No hay ventas registradas en este período."));
+                celdaVacia.setColspan(5);
+                celdaVacia.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tabla.addCell(celdaVacia);
             }
 
             documento.add(tabla);
 
-            // Total general al pie
+         // Total general al pie
             documento.add(new Paragraph(" "));
             Paragraph resumen = new Paragraph("Total general: " + String.format("$ %.2f", totalGeneral),
                     FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12));
             resumen.setAlignment(Element.ALIGN_RIGHT);
             documento.add(resumen);
 
+            // AGREGÁ ESTO PARA DEPURAR:
+            System.out.println("¡Llegué al final! Guardando el documento...");
+
+            // EL PASO VITAL:
             documento.close();
+            
+            // AGREGÁ ESTO TAMBIÉN:
+            System.out.println("¡PDF cerrado correctamente por iText!");    
+            
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error generando PDF: " + e.getMessage(), e);

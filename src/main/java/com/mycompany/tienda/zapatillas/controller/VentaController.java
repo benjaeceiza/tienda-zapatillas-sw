@@ -92,7 +92,7 @@ public class VentaController {
 
         Venta v = new Venta();
         v.setIdCliente(idCliente);
-        v.setIdUsuario(1); // Mantenemos ID 1 por ahora
+        v.setIdUsuario(com.mycompany.tienda.zapatillas.model.SesionGlobal.idUsuarioActual);
         v.setTotal(total);
 
         int idVentaGenerada = ventaDAO.registrarVenta(v);

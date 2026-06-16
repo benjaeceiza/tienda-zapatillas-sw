@@ -12,8 +12,7 @@ public class UsuarioController {
 
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    // Método que recibe tu vista de login para sacar los datos
-    public void procesarLogin(LoginView vistaLogin) {
+public void procesarLogin(LoginView vistaLogin) {
 
         // 1. Sacamos los datos usando los métodos públicos que vos creaste
         String correo = vistaLogin.getCorreo();
@@ -31,6 +30,12 @@ public class UsuarioController {
         // 3. Verificamos si existe y qué rol tiene
         if (usuarioLogueado != null) {
 
+            // ==========================================================
+            // ¡EL PASO MÁGICO! Guardamos los datos en la memoria global
+            // ==========================================================
+            com.mycompany.tienda.zapatillas.model.SesionGlobal.idUsuarioActual = usuarioLogueado.getIdUsuario();
+            com.mycompany.tienda.zapatillas.model.SesionGlobal.nombreUsuarioActual = usuarioLogueado.getNombre();
+
             if (usuarioLogueado.getRol().equals("ADMIN")) {
                 // ¡Es jefe! Abrimos el menú de Admin
                 MenuAdminView menuAdmin = new MenuAdminView();
@@ -40,7 +45,7 @@ public class UsuarioController {
                 // Cerramos la ventana de login
                 vistaLogin.dispose();
 
-            } else if (usuarioLogueado.getRol().equals("USER")) { // Asegúrate que coincida con lo que guarda tu BD
+            } else if (usuarioLogueado.getRol().equals("USER")) { 
                 // ¡Es empleado! Abrimos el menú de empleado
                 com.mycompany.tienda.zapatillas.view.menus.MenuEmpleadoView menuEmpleado = new com.mycompany.tienda.zapatillas.view.menus.MenuEmpleadoView();
                 menuEmpleado.setVisible(true);
@@ -49,7 +54,7 @@ public class UsuarioController {
                 // Cerramos el login
                 vistaLogin.dispose();
             }
-// ... 
+
         } else {
             // Si el DAO devolvió null, le pifió a la clave o al correo
             JOptionPane.showMessageDialog(vistaLogin, "Correo o contraseña incorrectos.", "Error de Login", JOptionPane.ERROR_MESSAGE);
